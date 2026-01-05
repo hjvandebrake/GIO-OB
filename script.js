@@ -1,5 +1,3 @@
-// script.js
-
 // --- STATE MANAGEMENT ---
 let currentLang = 'en'; 
 let currentSummaryIndex = 0;
@@ -178,4 +176,5 @@ function renderQuiz() {
 // Start in English when the page loads
 window.addEventListener('DOMContentLoaded', (event) => {
     setLanguage('en'); 
+
 });
