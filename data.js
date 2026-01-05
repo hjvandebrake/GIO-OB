@@ -1,3 +1,5 @@
+// data.js
+
 const uiTranslations = {
     en: {
         subtitle: "Weeks 2-7",
@@ -158,7 +160,7 @@ const contentData = {
                     <p>The study found distinct interaction effects between leadership style and follower personality:</p>
                     <ul>
                         <li><strong>Charismatic Leadership:</strong> Generally associated with lower burnout. However, this positive effect was strongest for employees with a low internal locus of control (those who feel they have little control over outcomes). These individuals rely more on the leader for guidance and inspiration. Employees with a high internal locus of control (who are self-motivated) derived less additional benefit from charisma regarding burnout reduction.</li>
-                        <li><strong>Autocratic Leadership:</strong> Generally associated with higher burnout. This negative effect was significantly stronger for employees with high neuroticism (emotional instability). Neurotic employees were more vulnerable to the stress and lack of support inherent in autocratic leadership. Interestingly, emotionally stable employees were largely unaffected by autocratic leadership in terms of burnout.</li>
+                        <li><strong>Autocratic Leadership:</strong> Generally associated with higher burnout. This negative effect was significantly stronger for employees with high neuroticism (emotional instability). Neurotische werknemers waren kwetsbaarder voor de stress en het gebrek aan steun die inherent zijn aan autocratisch leiderschap. Interestingly, emotionally stable employees were largely unaffected by autocratic leadership in terms of burnout.</li>
                     </ul>
 
                     <h3>Conclusion</h3>
@@ -289,7 +291,7 @@ const contentData = {
                         </ul>
 
                         <h3>Conclusie</h3>
-                        <p>Escalatie wordt gedreven door zowel terugkijken (rechtvaardigen van acties uit het verleden) als vooruitkijken (vermijden van toekomstige spijt). Besluitvormers zijn "spijtavers". Om escalatie te verminderen, moeten organisaties managers helpen inzien dat terugtrekken de spijt van verder verlies voorkomt, in plaats van te focussen op de potentiële spijt van een "gemiste kans".</p>
+                        <p>Escalation wordt gedreven door zowel terugkijken (rechtvaardigen van acties uit het verleden) als vooruitkijken (vermijden van toekomstige spijt). Besluitvormers zijn "spijtavers". Om escalatie te verminderen, moeten organisaties managers helpen inzien dat terugtrekken de spijt van verder verlies voorkomt, in plaats van te focussen op de potentiële spijt van een "gemiste kans".</p>
                     `
                 },
                 {
@@ -449,5 +451,4 @@ const contentData = {
                 }
             ]
         }
-
     };
