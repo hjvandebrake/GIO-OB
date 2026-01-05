@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GIO/OB Academic Papers</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <div class="lang-switch">
+        <button id="lang-en" class="lang-btn active" onclick="setLanguage('en')">EN</button>
+        <button id="lang-nl" class="lang-btn" onclick="setLanguage('nl')">NL</button>
+    </div>
+
+    <h1>GIO/OB Academic Papers</h1>
+    <p id="header-subtitle">Weeks 2-7</p>
+    
+    <div class="nav-container">
+        <button id="nav-intro" class="nav-btn active" onclick="showSection('intro')">Introduction</button>
+        <button id="nav-quiz" class="nav-btn" onclick="showSection('quiz')">Take Quiz</button>
+        <button id="nav-summary" class="nav-btn" onclick="showSection('summaries')">Read Summaries</button>
+    </div>
+</header>
+
+<div id="intro-section" class="page-section active-section">
+    <div class="intro-card">
+        <h2 id="intro-title">Welcome</h2>
+        <div class="intro-text">
+            <p id="intro-p1">...</p>
+            <p id="intro-p2">...</p>
+        </div>
+        
+        <div class="disclaimer-box">
+            <strong id="disclaimer-title">⚠️ Important Note</strong>
+            <p id="disclaimer-text">...</p>
+            <p id="disclaimer-sub">...</p>
+        </div>
+    </div>
+</div>
+
+<div id="quiz-section" class="page-section">
+    <div id="quiz-content">
+        </div>
+</div>
+
+<div id="summaries-section" class="page-section">
+    <div class="paper-section">
+        <h2 id="summary-title" class="paper-title">Paper Title</h2>
+        
+        <img id="summary-image" class="paper-image" src="" alt="Concept Diagram">
+        
+        <div id="summary-text" class="summary-content">
+            </div>
+
+        <div class="pagination-container">
+            <button class="page-btn" id="prev-btn" onclick="changeSummary(-1)">Previous Paper</button>
+            <span class="page-indicator" id="page-indicator">1 / 6</span>
+            <button class="page-btn" id="next-btn" onclick="changeSummary(1)">Next Paper</button>
+        </div>
+    </div>
+</div>
+
+<script src="data.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
