@@ -1,5 +1,3 @@
-// data.js
-
 const uiTranslations = {
     en: {
         subtitle: "Weeks 2-7",
@@ -451,4 +449,5 @@ const contentData = {
                 }
             ]
         }
+
     };
