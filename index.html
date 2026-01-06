@@ -64,9 +64,31 @@
     </div>
 </div>
 
+<div id="ai-section" class="page-section">
+    <div class="paper-section">
+        <h2 class="paper-title">AI Essay Practice</h2>
+        <p style="margin-bottom: 20px;">
+            <strong>Question:</strong> Explain the difference between "Shaping" and "Framcap" behaviors in the context of Higgs & Rowland (2011). Why is Shaping often less effective?
+        </p>
+
+        <textarea id="student-answer" placeholder="Type your answer here..." rows="6"></textarea>
+
+        <button class="check-btn" onclick="checkWithAI()">Ask AI to Grade</button>
+
+        <div id="ai-loading" style="display:none; margin-top:15px; color:#666;">
+            <em>Thinking... (This might take a few seconds)</em>
+        </div>
+
+        <div id="ai-feedback" class="feedback" style="display:none; margin-top: 20px;">
+            </div>
+    </div>
+</div>
+
+    
 <script src="data.js"></script>
 <script src="script.js"></script>
 
 </body>
 
 </html>
+
