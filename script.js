@@ -1,9 +1,11 @@
 // script.js
 
 // --- CONFIGURATION ---
-// ⚠️ WARNING: Since this is a public website, technically smart students could find this key.
-// For a school project, this is usually fine. For a real business, you'd need a backend.
-const API_KEY = "AIzaSyDyzg_sQGVIu2SnyYW0JF2a4EHM-GOqQhY"; 
+// ⚠️ PASTE YOUR NEW KEY HERE (starts with AIza...)
+const API_KEY = "PASTE_YOUR_API_KEY_HERE"; 
+
+// Update for 2026: Using the current stable Flash model
+const AI_MODEL = "gemini-2.5-flash"; 
 
 // --- STATE MANAGEMENT ---
 let currentLang = 'en'; 
@@ -18,7 +20,7 @@ function setLanguage(lang) {
     document.getElementById('lang-en').className = lang === 'en' ? 'lang-btn active' : 'lang-btn';
     document.getElementById('lang-nl').className = lang === 'nl' ? 'lang-btn active' : 'lang-btn';
 
-    // Update UI Text (Headings/Buttons)
+    // Update UI Text
     const t = uiTranslations[lang];
     document.getElementById('header-subtitle').innerText = t.subtitle;
     document.getElementById('nav-intro').innerText = t.navIntro;
@@ -62,7 +64,7 @@ function showSection(sectionName) {
     }
 }
 
-// --- AI GRADING LOGIC ---
+// --- AI GRADING LOGIC (UPDATED FOR 2026) ---
 async function checkWithAI() {
     const studentAnswer = document.getElementById('student-answer').value;
     const feedbackBox = document.getElementById('ai-feedback');
@@ -77,67 +79,68 @@ async function checkWithAI() {
     // 2. Show Loading
     loadingMsg.style.display = 'block';
     feedbackBox.style.display = 'none';
+    feedbackBox.innerHTML = '';
 
-    // 3. Prepare the prompt
-    // We give the AI the question and the rubric
+    // 3. Prepare Prompt
     const prompt = `
-        You are a strict but helpful university professor. 
-        The student was asked this question based on the paper by Higgs & Rowland (2011): 
-        "Explain the difference between Shaping and Framcap behaviors. Why is Shaping often less effective?"
+        You are a university professor grading an exam.
+        Question: Explain the difference between 'Shaping' and 'Framcap' behaviors (Higgs & Rowland, 2011).
+        Student Answer: "${studentAnswer}"
         
-        The student answered: 
-        "${studentAnswer}"
-        
-        Please grade this answer. 
-        1. Say if it is Correct, Partially Correct, or Incorrect.
-        2. Explain briefly why.
-        3. Keep it under 100 words.
+        Task:
+        1. Grade as Correct, Partially Correct, or Incorrect.
+        2. Explain why in 2-3 sentences.
+        3. Be concise.
     `;
 
-    // 4. Call Google Gemini API
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+    // 4. Call Google Gemini API (v1beta with Gemini 2.5)
+    // We use the variable AI_MODEL defined at the top
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/${AI_MODEL}:generateContent?key=${API_KEY}`;
 
     try {
         const response = await fetch(url, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                contents: [{
-                    parts: [{ text: prompt }]
-                }]
+                contents: [{ parts: [{ text: prompt }] }]
             })
         });
 
         const data = await response.json();
         
-        // 5. Display Result
+        // 5. Hide Loading
         loadingMsg.style.display = 'none';
+
+        if (!response.ok) {
+            console.error("API Error:", data);
+            feedbackBox.innerHTML = `<strong style="color:red;">Error: ${data.error ? data.error.message : "Model not found or Key invalid"}</strong>`;
+            feedbackBox.style.display = 'block';
+            return;
+        }
         
         if (data.candidates && data.candidates[0].content) {
             const aiText = data.candidates[0].content.parts[0].text;
-            
-            // Format the text nicely (convert markdown **bold** to html)
+            // Convert **bold** to HTML
             const formattedText = aiText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
             
             feedbackBox.innerHTML = formattedText;
-            feedbackBox.className = 'feedback ai-response-box'; // Use new CSS class
+            feedbackBox.className = 'feedback ai-response-box';
             feedbackBox.style.display = 'block';
         } else {
-            alert("Error: AI didn't return a valid response. Check API Key.");
+            feedbackBox.innerHTML = "<em>Error: No response text received.</em>";
+            feedbackBox.style.display = 'block';
         }
 
     } catch (error) {
-        console.error(error);
+        console.error("Network Error:", error);
         loadingMsg.style.display = 'none';
-        alert("Something went wrong connecting to the AI.");
+        feedbackBox.innerHTML = `<strong style="color:red;">Network Error. Check console for details.</strong>`;
+        feedbackBox.style.display = 'block';
     }
 }
 
 // --- SUMMARY LOGIC ---
 function renderSummary() {
-    // (This part stays the same as before)
     const summaries = contentData[currentLang].summaries;
     const paper = summaries[currentSummaryIndex];
     const t = uiTranslations[currentLang];
@@ -171,7 +174,6 @@ function changeSummary(direction) {
 
 // --- QUIZ LOGIC ---
 function renderQuiz() {
-    // (This part stays the same as before)
     const container = document.getElementById('quiz-content');
     container.innerHTML = ''; 
     
@@ -253,4 +255,3 @@ function renderQuiz() {
 window.addEventListener('DOMContentLoaded', (event) => {
     setLanguage('en'); 
 });
-
