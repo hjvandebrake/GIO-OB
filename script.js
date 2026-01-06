@@ -1,10 +1,10 @@
 // script.js
 
 // --- CONFIGURATION ---
-// ⚠️ PASTE YOUR NEW KEY HERE (starts with AIza...)
+// ⚠️ PASTE YOUR KEY HERE
 const API_KEY = "AIzaSyDyzg_sQGVIu2SnyYW0JF2a4EHM-GOqQhY"; 
 
-// Updated for 2026: Using the current stable Flash model
+// UPDATED: Using the model found in your terminal test (Gemini 2.5)
 const AI_MODEL = "gemini-2.5-flash"; 
 
 // --- STATE MANAGEMENT ---
@@ -41,11 +41,11 @@ function setLanguage(lang) {
 }
 
 function showSection(sectionName) {
-    // Hide all sections
+    // Hide all
     document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active-section'));
     document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
 
-    // Show specific section
+    // Show specific
     if(sectionName === 'intro') {
         document.getElementById('intro-section').classList.add('active-section');
         document.getElementById('nav-intro').classList.add('active');
@@ -64,7 +64,7 @@ function showSection(sectionName) {
     }
 }
 
-// --- AI GRADING LOGIC (UPDATED FOR 2026) ---
+// --- AI GRADING LOGIC (Fixed for Gemini 2.5) ---
 async function checkWithAI() {
     const studentAnswer = document.getElementById('student-answer').value;
     const feedbackBox = document.getElementById('ai-feedback');
@@ -93,8 +93,8 @@ async function checkWithAI() {
         3. Be concise.
     `;
 
-    // 4. Call Google Gemini API (v1beta with Gemini 2.5)
-    // We use the variable AI_MODEL defined at the top
+    // 4. Call Google Gemini API
+    // Using the 'gemini-2.5-flash' model we found in your terminal
     const url = `https://generativelanguage.googleapis.com/v1beta/models/${AI_MODEL}:generateContent?key=${API_KEY}`;
 
     try {
