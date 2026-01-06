@@ -84,13 +84,22 @@ async function checkWithAI() {
     // 3. Prepare Prompt
     const prompt = `
         You are a university professor grading an exam.
-        Question: Explain the difference between 'Shaping' and 'Framcap' behaviors (Higgs & Rowland, 2011).
+        Question: Using the Big Five framework, describe the traits of effective leaders. In your opinion, which one is the most important? Why?.
         Student Answer: "${studentAnswer}"
-        
+
+        Correct answer:
+        The big five are: conscientiousness, emotional
+        stability, extraversion, openness to experience,
+        agreeableness.
+
+        Effective leaders’ traits: extraversion, conscientiousness and openness to
+        experience. Answers will vary. Grounding is most important.
+       
         Task:
         1. Grade as Correct, Partially Correct, or Incorrect.
         2. Explain why in 2-3 sentences.
         3. Be concise.
+        4. Talk to the student directly.
     `;
 
     // 4. Call Google Gemini API
@@ -255,3 +264,4 @@ function renderQuiz() {
 window.addEventListener('DOMContentLoaded', (event) => {
     setLanguage('en'); 
 });
+
