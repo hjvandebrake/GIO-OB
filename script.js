@@ -4,7 +4,7 @@
 // ⚠️ PASTE YOUR NEW KEY HERE (starts with AIza...)
 const API_KEY = "AIzaSyDyzg_sQGVIu2SnyYW0JF2a4EHM-GOqQhY"; 
 
-// Update for 2026: Using the current stable Flash model
+// Updated for 2026: Using the current stable Flash model
 const AI_MODEL = "gemini-2.5-flash"; 
 
 // --- STATE MANAGEMENT ---
@@ -255,4 +255,3 @@ function renderQuiz() {
 window.addEventListener('DOMContentLoaded', (event) => {
     setLanguage('en'); 
 });
-
