@@ -3,7 +3,7 @@
 // --- CONFIGURATION ---
 // ⚠️ WARNING: Since this is a public website, technically smart students could find this key.
 // For a school project, this is usually fine. For a real business, you'd need a backend.
-const API_KEY = "PASTE_YOUR_API_KEY_HERE"; 
+const API_KEY = "AIzaSyDyzg_sQGVIu2SnyYW0JF2a4EHM-GOqQhY"; 
 
 // --- STATE MANAGEMENT ---
 let currentLang = 'en'; 
@@ -253,3 +253,4 @@ function renderQuiz() {
 window.addEventListener('DOMContentLoaded', (event) => {
     setLanguage('en'); 
 });
+
