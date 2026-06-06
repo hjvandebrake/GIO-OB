@@ -6,6 +6,7 @@ const state = {
   fteOnly: false,
   recentOnly: false,
   networkAipFilter: "all",
+  networkExternal: true,
   search: "",
   aipFilter: "all",
   journalSort: "pubs",
@@ -105,6 +106,7 @@ function cacheElements() {
   els.fteToggle = document.getElementById("fte-toggle");
   els.recentToggle = document.getElementById("recent-toggle");
   els.networkAipFilter = document.getElementById("network-aip-filter");
+  els.networkExternalToggle = document.getElementById("network-external-toggle");
   els.networkSvg = document.getElementById("network-svg");
   els.networkEmpty = document.getElementById("network-empty");
   els.networkTableWrap = document.getElementById("network-table-wrap");
@@ -127,6 +129,10 @@ function attachEvents() {
   });
   els.networkAipFilter.addEventListener("change", () => {
     state.networkAipFilter = els.networkAipFilter.value;
+    renderNetwork();
+  });
+  els.networkExternalToggle.addEventListener("change", () => {
+    state.networkExternal = els.networkExternalToggle.checked;
     renderNetwork();
   });
   els.pubSearch.addEventListener("input", () => {
@@ -421,6 +427,13 @@ function renderStaffTopics(personId) {
 }
 
 function renderStaffRelated(personId, bundle, row) {
+  let summaryPubs = staffPublicationRecords(personId);
+  if (bundle.raw) {
+    const matchingPubIds = new Set(row.matchingDocs.filter((doc) => doc.type === "publication").map((doc) => doc.id));
+    summaryPubs = summaryPubs.filter((pub) => matchingPubIds.has(pub.id));
+  }
+  const journalItems = topStaffJournals(summaryPubs);
+  const coauthorItems = topStaffCoauthors(personId, summaryPubs);
   const grants = staffGrantRecords(personId);
   const theses = staffThesisRecords(personId);
   let grantItems = grants.map((grant) => ({ type: grantDisplayLabel(grant), year: grant.year || "", title: grant.title, sourceUrl: grant.sourceUrl, sourceLabel: grant.sourceLabel }));
@@ -447,14 +460,74 @@ function renderStaffRelated(personId, bundle, row) {
   }
   grantItems = grantItems.sort((a, b) => Number(b.year || 0) - Number(a.year || 0));
   thesisItems = thesisItems.sort((a, b) => Number(b.year || 0) - Number(a.year || 0));
-  if (!grantItems.length && !thesisItems.length) {
+  if (!journalItems.length && !coauthorItems.length && !grantItems.length && !thesisItems.length) {
     els.staffRelated.innerHTML = "";
     return;
   }
   els.staffRelated.innerHTML = [
+    relatedSection(bundle.raw ? `Top journals matching "${bundle.raw}"` : "Top journals", journalItems),
+    relatedSection(bundle.raw ? `Top coauthors matching "${bundle.raw}"` : "Top coauthors", coauthorItems),
     relatedSection(bundle.raw ? `Grants matching "${bundle.raw}"` : "Grants", grantItems),
     relatedSection(bundle.raw ? `PhD supervision matching "${bundle.raw}"` : "PhD supervision", thesisItems),
   ].join("");
+}
+
+function topStaffJournals(pubs) {
+  const byJournal = new Map();
+  pubs.forEach((pub) => {
+    const journal = pub.aipJournal || pub.journal;
+    if (!journal) return;
+    if (!byJournal.has(journal)) {
+      byJournal.set(journal, { journal, count: 0, aip: null, rankableJournal: pub.rankableJournal !== false });
+    }
+    const row = byJournal.get(journal);
+    row.count += 1;
+    if (isNumber(pub.aip)) row.aip = pub.aip;
+    if (pub.rankableJournal === false) row.rankableJournal = false;
+  });
+  return Array.from(byJournal.values())
+    .sort((a, b) => b.count - a.count || (b.aip || -1) - (a.aip || -1) || a.journal.localeCompare(b.journal))
+    .slice(0, 6)
+    .map((row) => ({
+      type: `${row.count} ${row.count === 1 ? "pub" : "pubs"}`,
+      year: "",
+      title: `${row.journal}${isNumber(row.aip) ? ` (AIP ${row.aip.toFixed(1)})` : ""}`,
+    }));
+}
+
+function topStaffCoauthors(personId, pubs) {
+  const people = peopleById();
+  const byCoauthor = new Map();
+  pubs.forEach((pub) => {
+    const seen = new Set();
+    pub.matchedPeople.forEach((id) => {
+      if (id === personId || !people.has(id)) return;
+      const key = `roster:${id}`;
+      if (seen.has(key)) return;
+      seen.add(key);
+      addCoauthorStat(byCoauthor, key, people.get(id).display, "roster", pub.id);
+    });
+    externalAuthorsForPublication(pub).forEach((author) => {
+      const key = externalAuthorId(author);
+      if (seen.has(key)) return;
+      seen.add(key);
+      addCoauthorStat(byCoauthor, key, author, "external", pub.id);
+    });
+  });
+  return Array.from(byCoauthor.values())
+    .map((row) => ({ ...row, count: row.pubIds.size }))
+    .sort((a, b) => b.count - a.count || a.label.localeCompare(b.label))
+    .slice(0, 8)
+    .map((row) => ({
+      type: `${row.count} shared`,
+      year: "",
+      title: `${row.label}${row.scope === "external" ? " (external)" : ""}`,
+    }));
+}
+
+function addCoauthorStat(map, key, label, scope, pubId) {
+  if (!map.has(key)) map.set(key, { key, label, scope, pubIds: new Set() });
+  map.get(key).pubIds.add(pubId);
 }
 
 function relatedSection(title, items) {
@@ -997,6 +1070,126 @@ function publicationCell(pub) {
     <span class="small-muted">${escapeHtml(pub.authors.slice(0, 8).join(", "))}${pub.authors.length > 8 ? ", ..." : ""}</span>`;
 }
 
+function buildExternalCollaboration(pubs, activeIds) {
+  const stats = new Map();
+  const edgeMap = new Map();
+  pubs.forEach((pub) => {
+    const internalIds = [...new Set(pub.matchedPeople.filter((id) => activeIds.has(id)))].sort();
+    if (!internalIds.length) return;
+    const externalAuthors = externalAuthorsForPublication(pub);
+    if (!externalAuthors.length) return;
+    internalIds.forEach((id) => {
+      externalAuthors.forEach((author) => {
+        const target = externalAuthorId(author);
+        if (!stats.has(target)) stats.set(target, { id: target, label: author, pubIds: new Set(), strength: 0 });
+        const stat = stats.get(target);
+        stat.pubIds.add(pub.id);
+        stat.strength += 1;
+        const key = `${id}|${target}`;
+        if (!edgeMap.has(key)) edgeMap.set(key, { source: id, target, count: 0, pubIds: [] });
+        const edge = edgeMap.get(key);
+        edge.count += 1;
+        edge.pubIds.push(pub.id);
+      });
+    });
+  });
+
+  const ranked = Array.from(stats.values())
+    .map((node) => ({
+      id: node.id,
+      label: node.label,
+      shortLabel: shortExternalLabel(node.label),
+      count: node.pubIds.size,
+      strength: node.strength,
+    }))
+    .sort((a, b) => b.count - a.count || b.strength - a.strength || a.label.localeCompare(b.label));
+  const repeated = ranked.filter((node) => node.count > 1);
+  const selectedNodes = (repeated.length >= 16 ? repeated : ranked).slice(0, 28);
+  const selectedIds = new Set(selectedNodes.map((node) => node.id));
+  const selectedEdges = Array.from(edgeMap.values())
+    .filter((edge) => selectedIds.has(edge.target))
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 90);
+  return { nodes: selectedNodes, edges: selectedEdges };
+}
+
+function externalAuthorsForPublication(pub) {
+  const roster = state.data?.people || [];
+  const authors = new Map();
+  (pub.authors || []).forEach((rawAuthor) => {
+    const author = canonicalExternalAuthor(rawAuthor);
+    if (!author || authorIsRosterMember(author, roster)) return;
+    authors.set(externalAuthorId(author), author);
+  });
+  return Array.from(authors.values());
+}
+
+function canonicalExternalAuthor(value) {
+  const author = String(value || "").replace(/\s+/g, " ").trim();
+  if (!author || /^anonymous$/i.test(author)) return "";
+  return author;
+}
+
+function externalAuthorId(author) {
+  return `external:${normalizeSearchText(author)}`;
+}
+
+function authorIsRosterMember(author, roster) {
+  return roster.some((person) => authorMatchesPerson(author, person));
+}
+
+function authorMatchesPerson(author, person) {
+  const normalized = normalizeSearchText(author);
+  if (!normalized) return false;
+  const families = (person.families || [])
+    .map(normalizeSearchText)
+    .filter(Boolean)
+    .sort((a, b) => b.length - a.length);
+  const matchedFamily = families.find((family) => normalizedHasPhrase(normalized, family));
+  if (!matchedFamily) return false;
+  const initials = authorInitials(author, families);
+  const firstInitials = new Set((person.firstInitials || []).map((initial) => String(initial).toLowerCase()));
+  if (!firstInitials.size || !initials.size) return true;
+  return Array.from(firstInitials).some((initial) => initials.has(initial));
+}
+
+function authorInitials(author, families) {
+  let normalized = normalizeSearchText(author);
+  families.forEach((family) => {
+    normalized = removeNormalizedPhrase(normalized, family);
+  });
+  normalized = normalized.replace(/\b(de|der|van|von|den|the|and)\b/g, " ").replace(/\s+/g, " ").trim();
+  const initials = new Set();
+  normalized.split(" ").filter(Boolean).forEach((token) => {
+    if (token.length <= 3) {
+      token.split("").forEach((letter) => initials.add(letter));
+    } else {
+      initials.add(token[0]);
+    }
+  });
+  return initials;
+}
+
+function normalizedHasPhrase(text, phrase) {
+  return ` ${text} `.includes(` ${phrase} `);
+}
+
+function removeNormalizedPhrase(text, phrase) {
+  return ` ${text} `.replaceAll(` ${phrase} `, " ").replace(/\s+/g, " ").trim();
+}
+
+function shortExternalLabel(name) {
+  const trimmed = String(name || "").replace(/\s+/g, " ").trim();
+  if (trimmed.length <= 20) return trimmed;
+  const commaParts = trimmed.split(",");
+  if (commaParts.length > 1) {
+    return `${commaParts[0].trim()}, ${commaParts[1].trim().slice(0, 4)}`.slice(0, 22);
+  }
+  const tokens = trimmed.split(" ").filter(Boolean);
+  if (tokens.length > 1) return `${tokens[tokens.length - 1]}, ${tokens[0][0]}.`.slice(0, 22);
+  return trimmed.slice(0, 20);
+}
+
 function renderNetwork() {
   if (!state.data || !els.networkSvg) return;
   const people = activePeople();
@@ -1046,12 +1239,15 @@ function renderNetwork() {
     degree: nodeStats.get(person.id)?.degree || 0,
     strength: nodeStats.get(person.id)?.strength || 0,
   }));
-  els.networkEmpty.hidden = edges.length > 0;
-  drawNetwork(nodes, edges);
+  const external = state.networkExternal
+    ? buildExternalCollaboration(pubs, activeIds)
+    : { nodes: [], edges: [] };
+  els.networkEmpty.hidden = edges.length > 0 || external.edges.length > 0;
+  drawNetwork(nodes, edges, external.nodes, external.edges);
   renderNetworkTable(edges, pubs);
 }
 
-function drawNetwork(nodes, edges) {
+function drawNetwork(nodes, edges, externalNodes = [], externalEdges = []) {
   const svg = els.networkSvg;
   const rect = svg.getBoundingClientRect();
   const width = Math.max(560, rect.width || svg.clientWidth || 900);
@@ -1061,6 +1257,21 @@ function drawNetwork(nodes, edges) {
   const placed = layoutNetwork(nodes, edges, width, height);
   const byId = new Map(placed.map((node) => [node.id, node]));
   const maxEdgeCount = Math.max(1, ...edges.map((edge) => edge.count));
+  const placedExternal = layoutExternalNodes(externalNodes, externalEdges, placed, width, height);
+  const externalById = new Map(placedExternal.map((node) => [node.id, node]));
+  const maxExternalEdgeCount = Math.max(1, ...externalEdges.map((edge) => edge.count));
+
+  externalEdges.forEach((edge) => {
+    const a = byId.get(edge.source);
+    const b = externalById.get(edge.target);
+    if (!a || !b) return;
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute("d", externalEdgePath(a, b, width, height));
+    path.setAttribute("class", "external-edge");
+    path.setAttribute("stroke-width", String((0.55 + (edge.count / maxExternalEdgeCount) * 2.1).toFixed(2)));
+    path.appendChild(svgTitle(`${a.label} + ${b.label}: ${edge.count} shared publications`));
+    svg.appendChild(path);
+  });
 
   edges.forEach((edge) => {
     const a = byId.get(edge.source);
@@ -1072,6 +1283,27 @@ function drawNetwork(nodes, edges) {
     path.setAttribute("stroke-width", String((1.8 + (edge.count / maxEdgeCount) * 13).toFixed(2)));
     path.appendChild(svgTitle(`${a.label} + ${b.label}: ${edge.count} shared publications`));
     svg.appendChild(path);
+  });
+
+  placedExternal.forEach((node) => {
+    const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    const radius = Math.max(3.5, Math.min(8, 3 + Math.sqrt(node.count || 0) * 1.4));
+    circle.setAttribute("cx", node.x);
+    circle.setAttribute("cy", node.y);
+    circle.setAttribute("r", String(radius.toFixed(1)));
+    circle.setAttribute("class", "external-node");
+    circle.appendChild(svgTitle(`${node.label}: ${node.count} shared publications with roster members`));
+    group.appendChild(circle);
+
+    const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    label.setAttribute("x", node.x);
+    label.setAttribute("y", node.y + radius + 10);
+    label.setAttribute("text-anchor", "middle");
+    label.setAttribute("class", "external-label");
+    label.textContent = node.shortLabel;
+    group.appendChild(label);
+    svg.appendChild(group);
   });
 
   placed.forEach((node) => {
@@ -1139,6 +1371,49 @@ function layoutNetwork(nodes, edges, width, height) {
   return placed;
 }
 
+function layoutExternalNodes(externalNodes, externalEdges, internalNodes, width, height) {
+  if (!externalNodes.length) return [];
+  const cx = width / 2;
+  const cy = height / 2;
+  const internalById = new Map(internalNodes.map((node) => [node.id, node]));
+  const edgesByExternal = new Map();
+  externalEdges.forEach((edge) => {
+    if (!edgesByExternal.has(edge.target)) edgesByExternal.set(edge.target, []);
+    edgesByExternal.get(edge.target).push(edge);
+  });
+  const groups = new Map();
+  externalNodes.forEach((node) => {
+    const strongest = (edgesByExternal.get(node.id) || [])
+      .slice()
+      .sort((a, b) => b.count - a.count)[0];
+    const anchorId = strongest?.source || "_unanchored";
+    if (!groups.has(anchorId)) groups.set(anchorId, []);
+    groups.get(anchorId).push(node);
+  });
+
+  const rx = width * 0.485;
+  const ry = height * 0.445;
+  const placed = [];
+  Array.from(groups.entries()).forEach(([anchorId, group], groupIndex) => {
+    const anchor = internalById.get(anchorId);
+    const baseAngle = anchor
+      ? Math.atan2(anchor.y - cy, anchor.x - cx)
+      : -Math.PI / 2 + (Math.PI * 2 * groupIndex) / Math.max(1, groups.size);
+    group.sort((a, b) => b.count - a.count || a.label.localeCompare(b.label));
+    group.forEach((node, index) => {
+      const spread = (index - (group.length - 1) / 2) * 0.17;
+      const jitter = hashNumber(node.id) * 0.05;
+      const angle = baseAngle + spread + jitter;
+      placed.push({
+        ...node,
+        x: clamp(cx + Math.cos(angle) * rx, 18, width - 18),
+        y: clamp(cy + Math.sin(angle) * ry, 18, height - 18),
+      });
+    });
+  });
+  return placed;
+}
+
 function edgePath(edge, a, b, nodes) {
   const dx = b.x - a.x;
   const dy = b.y - a.y;
@@ -1164,6 +1439,22 @@ function edgePath(edge, a, b, nodes) {
   return `M ${a.x.toFixed(1)} ${a.y.toFixed(1)} Q ${cx.toFixed(1)} ${cy.toFixed(1)} ${b.x.toFixed(1)} ${b.y.toFixed(1)}`;
 }
 
+function externalEdgePath(a, b, width, height) {
+  const cx = width / 2;
+  const cy = height / 2;
+  const dx = b.x - cx;
+  const dy = b.y - cy;
+  const len = Math.hypot(dx, dy) || 1;
+  const outX = dx / len;
+  const outY = dy / len;
+  const mx = (a.x + b.x) / 2;
+  const my = (a.y + b.y) / 2;
+  const bend = 22 + Math.min(28, Math.max(0, (Math.hypot(b.x - a.x, b.y - a.y) - 180) * 0.08));
+  const qx = mx + outX * bend;
+  const qy = my + outY * bend;
+  return `M ${a.x.toFixed(1)} ${a.y.toFixed(1)} Q ${qx.toFixed(1)} ${qy.toFixed(1)} ${b.x.toFixed(1)} ${b.y.toFixed(1)}`;
+}
+
 function distancePointToSegment(px, py, ax, ay, bx, by) {
   const dx = bx - ax;
   const dy = by - ay;
@@ -1174,12 +1465,24 @@ function distancePointToSegment(px, py, ax, ay, bx, by) {
   return Math.hypot(px - x, py - y);
 }
 
+function clamp(value, min, max) {
+  return Math.max(min, Math.min(max, value));
+}
+
 function hashSign(value) {
   let hash = 0;
   for (let idx = 0; idx < value.length; idx += 1) {
     hash = (hash * 31 + value.charCodeAt(idx)) | 0;
   }
   return hash % 2 === 0 ? 1 : -1;
+}
+
+function hashNumber(value) {
+  let hash = 0;
+  for (let idx = 0; idx < value.length; idx += 1) {
+    hash = (hash * 31 + value.charCodeAt(idx)) | 0;
+  }
+  return ((Math.abs(hash) % 2000) / 1000) - 1;
 }
 
 function renderNetworkTable(edges, pubs) {
