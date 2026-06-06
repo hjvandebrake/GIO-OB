@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HRM&OB Publication Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:opsz,wght@9..40,300;9..40,400;9..40,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20260606-7">
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-in">
+      <a class="logo" href="#overview" data-tab="overview">
+        <span class="logo-name">HRM&OB</span>
+        <span class="logo-sub">Publication dashboard</span>
+      </a>
+      <div class="nav-sep"></div>
+      <div class="nav-tabs" aria-label="Dashboard sections">
+        <button class="nav-tab on" data-tab="overview">Overview</button>
+        <button class="nav-tab" data-tab="staff">Staff</button>
+        <button class="nav-tab" data-tab="publications">Publications</button>
+        <button class="nav-tab" data-tab="network">Network</button>
+        <button class="nav-tab" data-tab="grants">Grants</button>
+        <button class="nav-tab" data-tab="phds">PhDs</button>
+      </div>
+      <label class="switch">
+        <input id="recent-toggle" type="checkbox">
+        <span>Last 5 years</span>
+      </label>
+      <label class="switch">
+        <input id="fte-toggle" type="checkbox">
+        <span>FTE &gt; 25%</span>
+      </label>
+    </div>
+  </nav>
+
+  <header class="pg-hd">
+    <div class="wrap">
+      <p class="eye">HRM&OB dashboard</p>
+      <h1>Research activities by HRM&OB members</h1>
+      <p id="subtitle">Loading publication data...</p>
+    </div>
+  </header>
+
+  <main>
+    <section id="view-overview" class="sec">
+      <div class="wrap">
+        <div id="metrics" class="metric-grid"></div>
+        <div class="dash-grid">
+          <section>
+            <div class="sec-head compact">
+              <div>
+                <p class="eye">Journal overview</p>
+                <h2 class="h2">Publication counts by journal</h2>
+              </div>
+              <label class="select-box overview-sort">
+                <span>Sort by</span>
+                <select id="journal-sort">
+                  <option value="pubs">Publication count</option>
+                  <option value="aip">AIP score</option>
+                </select>
+              </label>
+            </div>
+            <div class="table-wrap">
+              <table id="journal-table"></table>
+            </div>
+          </section>
+          <aside>
+            <h2 class="sub-h2">Publication years</h2>
+            <div id="year-bars" class="bar-chart"></div>
+            <h2 class="sub-h2">AIP bands</h2>
+            <div id="aip-bars" class="bar-chart"></div>
+            <h2 class="sub-h2">Journal types</h2>
+            <div id="category-list" class="list-stack"></div>
+            <h2 class="sub-h2">Competitive grants</h2>
+            <div id="grant-list" class="grant-list"></div>
+            <h2 class="sub-h2">Defended PhDs</h2>
+            <div id="phd-list" class="grant-list"></div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-publications" class="sec" hidden>
+      <div class="wrap">
+        <div class="tool-row">
+          <label class="search-box">
+            <span>Search</span>
+            <input id="pub-search" type="search" placeholder="Title, journal, author">
+          </label>
+          <label class="select-box">
+            <span>AIP band</span>
+            <select id="aip-filter">
+              <option value="all">All</option>
+              <option value="gte95">AIP &ge; 95</option>
+              <option value="90-95">AIP 90-&lt;95</option>
+              <option value="lt90">AIP &lt; 90</option>
+            </select>
+          </label>
+        </div>
+        <div class="table-wrap">
+          <table id="publication-table"></table>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-staff" class="sec" hidden>
+      <div class="wrap">
+        <div class="sec-head compact">
+          <div>
+            <p class="eye">Staff expertise</p>
+            <h2 class="h2">People, topics, and publication records</h2>
+          </div>
+        </div>
+        <div class="tool-row staff-tool-row">
+          <label class="search-box expertise-box">
+            <span>Expertise search</span>
+            <input id="expertise-search" type="search" placeholder="Teams, groups, stress, leadership, ethics">
+          </label>
+        </div>
+        <div class="staff-grid">
+          <aside class="staff-panel">
+            <div id="staff-list" class="staff-list"></div>
+          </aside>
+          <section class="staff-detail">
+            <div id="staff-profile"></div>
+            <h3 class="sub-h2">Topic signals</h3>
+            <div id="staff-topics" class="topic-cloud"></div>
+            <div id="staff-related"></div>
+            <div class="sec-head compact staff-pub-head">
+              <div>
+                <p id="staff-publication-eye" class="eye">Publications</p>
+                <h3 id="staff-publication-title" class="h2 staff-h2">Selected staff publications</h3>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table id="staff-publication-table"></table>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-network" class="sec" hidden>
+      <div class="wrap">
+        <div class="sec-head compact">
+          <div>
+            <p class="eye">Coauthorship network</p>
+            <h2 class="h2">Roster members connected by shared publications</h2>
+          </div>
+          <label class="select-box network-select">
+            <span>Network AIP</span>
+            <select id="network-aip-filter">
+              <option value="all">All publications</option>
+              <option value="gt90">AIP &gt; 90</option>
+              <option value="gte95">AIP &ge; 95</option>
+            </select>
+          </label>
+        </div>
+        <div class="network-shell">
+          <svg id="network-svg" role="img" aria-label="Coauthorship network"></svg>
+          <div id="network-empty" class="empty" hidden>No coauthorship edges for the current filters.</div>
+        </div>
+        <div class="legend">
+          <span><i class="legend-node"></i> Node size = publications</span>
+          <span><i class="legend-count"></i> Number = publications</span>
+          <span><i class="legend-line"></i> Line thickness = shared publications</span>
+        </div>
+        <div id="network-table-wrap" class="table-wrap compact-table"></div>
+      </div>
+    </section>
+
+    <section id="view-grants" class="sec" hidden>
+      <div class="wrap">
+        <div class="sec-head compact">
+          <div>
+            <p class="eye">Competitive grants</p>
+            <h2 class="h2">NWO Talent Scheme and similar external funding</h2>
+          </div>
+        </div>
+        <p id="grant-note" class="quiet-note"></p>
+        <div class="table-wrap">
+          <table id="grant-table"></table>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-phds" class="sec" hidden>
+      <div class="wrap">
+        <div class="sec-head compact">
+          <div>
+            <p class="eye">Completed PhD supervision</p>
+            <h2 class="h2">Defended theses supervised by roster members</h2>
+          </div>
+        </div>
+        <p id="phd-note" class="quiet-note"></p>
+        <div class="table-wrap">
+          <table id="phd-table"></table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="ft">
+      <span>HRM&OB publication dashboard prototype</span>
+      <span id="footer-meta"></span>
+    </div>
+  </footer>
+
+  <script src="app.js?v=20260606-7"></script>
+</body>
+</html>
