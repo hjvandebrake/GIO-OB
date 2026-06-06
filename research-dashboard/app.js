@@ -378,7 +378,7 @@ function rankedStaff(bundle) {
   if (bundle.raw) {
     return rows
       .filter((row) => row.score > 0)
-      .sort((a, b) => a.person.display.localeCompare(b.person.display));
+      .sort((a, b) => b.topicPubPct - a.topicPubPct || b.topicPubs - a.topicPubs || b.score - a.score || a.person.display.localeCompare(b.person.display));
   }
   return rows.sort((a, b) => a.person.display.localeCompare(b.person.display));
 }
@@ -402,6 +402,7 @@ function staffSearchStats(person, bundle) {
     phds: theses.length,
     score: matchingDocs.reduce((sum, doc) => sum + doc.matchScore, 0),
     topicPubs: matchingDocs.filter((doc) => doc.type === "publication").length,
+    topicPubPct: pubs.length ? matchingDocs.filter((doc) => doc.type === "publication").length / pubs.length : 0,
     topicGrants: matchingDocs.filter((doc) => doc.type === "grant").length,
     topicPhds: matchingDocs.filter((doc) => doc.type === "phd").length,
     matchingDocs,
@@ -427,7 +428,7 @@ function renderStaffList(rows, bundle) {
   els.staffList.innerHTML = rows.map((row) => {
     const selected = row.person.id === state.selectedStaffId;
     const meta = bundle.raw
-      ? `${row.topicPubs} matching pubs`
+      ? `${formatPercent(row.topicPubPct)} · ${row.topicPubs} matching pubs`
       : `${row.publications} pubs`;
     return `<button class="staff-row${selected ? " on" : ""}" type="button" data-staff-id="${escapeHtml(row.person.id)}">
       <span class="staff-row-main">
@@ -490,10 +491,15 @@ function staffMetric(label, value) {
 }
 
 function matchSummary(row) {
-  const parts = [`${row.topicPubs} publication${row.topicPubs === 1 ? "" : "s"}`];
+  const parts = [`${formatPercent(row.topicPubPct)} of publications`, `${row.topicPubs} publication${row.topicPubs === 1 ? "" : "s"}`];
   if (row.topicGrants) parts.push(`${row.topicGrants} grant${row.topicGrants === 1 ? "" : "s"}`);
   if (row.topicPhds) parts.push(`${row.topicPhds} PhD${row.topicPhds === 1 ? "" : "s"}`);
   return parts.join(", ");
+}
+
+function formatPercent(value) {
+  if (!isNumber(value)) return "0%";
+  return `${Math.round(value * 100)}%`;
 }
 
 function renderStaffTopics(personId) {
@@ -776,8 +782,8 @@ function renderOverview() {
     metric("Publications", pubs.length),
     metric("Mean AIP", isNumber(meanAip) ? meanAip.toFixed(1) : "NA"),
     metric("AIP >= 95", highAip.length),
-    metric("Avg pubs/person-year", isNumber(averages.publications) ? averages.publications.toFixed(2) : "NA"),
-    metric("Avg >=95/person-year", isNumber(averages.highAip) ? averages.highAip.toFixed(2) : "NA"),
+    metric("Avg pubs/person-year", isNumber(averages.publications) ? averages.publications.toFixed(2) : "NA", "", isNumber(averages.publicationsSd) ? averages.publicationsSd.toFixed(2) : ""),
+    metric("Avg >=95/person-year", isNumber(averages.highAip) ? averages.highAip.toFixed(2) : "NA", "", isNumber(averages.highAipSd) ? averages.highAipSd.toFixed(2) : ""),
   ].join("");
 
   renderJournalTable(journals);
@@ -788,10 +794,10 @@ function renderOverview() {
   renderOverviewPhds(activeTheses());
 }
 
-function metric(label, value, sub = "") {
+function metric(label, value, sub = "", sd = "") {
   return `<div class="metric">
     <p class="metric-label">${escapeHtml(label)}</p>
-    <p class="metric-value">${escapeHtml(String(value))}</p>
+    <p class="metric-value">${escapeHtml(String(value))}${sd ? ` <span class="metric-sd">(SD ${escapeHtml(sd)})</span>` : ""}</p>
     ${sub ? `<p class="metric-sub">${escapeHtml(sub)}</p>` : ""}
   </div>`;
 }
@@ -806,21 +812,38 @@ function personYearAverages(pubs, people, startYearOverride = null) {
   if (!Number.isFinite(startYear) || !Number.isFinite(endYear) || endYear < startYear) {
     return { publications: null, highAip: null, personYears: 0 };
   }
-  let personYears = 0;
+  const pubObservations = [];
+  const highAipObservations = [];
   people.forEach((person) => {
     const personPubs = pubs.filter((pub) => pub.matchedPeople.includes(person.id));
     if (!personPubs.length) return;
     const firstYear = Math.min(...personPubs.map((pub) => pub.year).filter((year) => Number.isFinite(year)));
     if (!Number.isFinite(firstYear)) return;
-    personYears += Math.max(0, endYear - Math.max(startYear, firstYear) + 1);
+    for (let year = Math.max(startYear, firstYear); year <= endYear; year += 1) {
+      const yearPubs = personPubs.filter((pub) => pub.year === year);
+      pubObservations.push(yearPubs.length);
+      highAipObservations.push(yearPubs.filter((pub) => isNumber(pub.aip) && pub.aip >= 95).length);
+    }
   });
+  const personYears = pubObservations.length;
   if (!personYears) return { publications: null, highAip: null, personYears: 0 };
-  const highAip = pubs.filter((pub) => isNumber(pub.aip) && pub.aip >= 95).length;
   return {
-    publications: pubs.length / personYears,
-    highAip: highAip / personYears,
+    publications: mean(pubObservations),
+    publicationsSd: standardDeviation(pubObservations),
+    highAip: mean(highAipObservations),
+    highAipSd: standardDeviation(highAipObservations),
     personYears,
   };
+}
+
+function mean(values) {
+  return values.length ? values.reduce((sum, value) => sum + value, 0) / values.length : null;
+}
+
+function standardDeviation(values) {
+  if (!values.length) return null;
+  const avg = mean(values);
+  return Math.sqrt(values.reduce((sum, value) => sum + (value - avg) ** 2, 0) / values.length);
 }
 
 function overviewStartYear() {
@@ -1165,7 +1188,10 @@ function renderPublications() {
     if (state.aipFilter === "lt90") return isNumber(pub.aip) && pub.aip < 90;
     return true;
   });
-  pubs = pubs.slice().sort((a, b) => b.year - a.year || (b.aip || -1) - (a.aip || -1));
+  pubs = pubs
+    .map((pub, idx) => ({ pub, idx }))
+    .sort((a, b) => publicationDateValue(b.pub) - publicationDateValue(a.pub) || a.idx - b.idx)
+    .map((row) => row.pub);
 
   const rows = pubs.map((pub) => [
     pub.year,
@@ -1181,6 +1207,15 @@ function publicationCell(pub) {
   const doi = pub.doi ? `<a class="doi" href="https://doi.org/${encodeURIComponent(pub.doi)}" target="_blank" rel="noopener">doi</a>` : "";
   return `<span class="primary-text">${escapeHtml(pub.title)}</span> ${doi}<br>
     <span class="small-muted">${escapeHtml(pub.authors.slice(0, 8).join(", "))}${pub.authors.length > 8 ? ", ..." : ""}</span>`;
+}
+
+function publicationDateValue(pub) {
+  const rawDate = pub.publicationDate || pub.publishedDate || pub.date || "";
+  if (rawDate) {
+    const parsed = Date.parse(rawDate);
+    if (!Number.isNaN(parsed)) return parsed;
+  }
+  return isNumber(pub.year) ? Date.UTC(pub.year, 0, 1) : 0;
 }
 
 function buildExternalCollaboration(pubs, activeIds) {
