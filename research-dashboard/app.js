@@ -582,7 +582,7 @@ function topStaffCoauthors(personId, pubs) {
       const key = externalAuthorId(author);
       if (seen.has(key)) return;
       seen.add(key);
-      addCoauthorStat(byCoauthor, key, author, "external", pub.id);
+      addCoauthorStat(byCoauthor, key, externalAuthorLabel(author), "external", pub.id);
     });
   });
   return Array.from(byCoauthor.values())
@@ -598,6 +598,7 @@ function topStaffCoauthors(personId, pubs) {
 
 function addCoauthorStat(map, key, label, scope, pubId) {
   if (!map.has(key)) map.set(key, { key, label, scope, pubIds: new Set() });
+  if (scope === "external" && betterExternalLabel(label, map.get(key).label)) map.get(key).label = label;
   map.get(key).pubIds.add(pubId);
 }
 
@@ -1152,8 +1153,10 @@ function buildExternalCollaboration(pubs, activeIds) {
     internalIds.forEach((id) => {
       externalAuthors.forEach((author) => {
         const target = externalAuthorId(author);
-        if (!stats.has(target)) stats.set(target, { id: target, label: author, pubIds: new Set(), strength: 0 });
+        const label = externalAuthorLabel(author);
+        if (!stats.has(target)) stats.set(target, { id: target, label, pubIds: new Set(), strength: 0 });
         const stat = stats.get(target);
+        if (betterExternalLabel(label, stat.label)) stat.label = label;
         stat.pubIds.add(pub.id);
         stat.strength += 1;
         const key = `${id}|${target}`;
@@ -1165,7 +1168,25 @@ function buildExternalCollaboration(pubs, activeIds) {
     });
   });
 
+  const selectedEdges = Array.from(edgeMap.values())
+    .filter((edge) => edge.count >= 2)
+    .sort((a, b) => b.count - a.count);
+  const selectedIds = new Set(selectedEdges.map((edge) => edge.target));
+  const labelIds = new Set();
+  const edgesBySource = new Map();
+  selectedEdges.forEach((edge) => {
+    if (!edgesBySource.has(edge.source)) edgesBySource.set(edge.source, []);
+    edgesBySource.get(edge.source).push(edge);
+  });
+  edgesBySource.forEach((sourceEdges) => {
+    sourceEdges
+      .slice()
+      .sort((a, b) => b.count - a.count)
+      .slice(0, 4)
+      .forEach((edge) => labelIds.add(edge.target));
+  });
   const ranked = Array.from(stats.values())
+    .filter((node) => selectedIds.has(node.id))
     .map((node) => ({
       id: node.id,
       label: node.label,
@@ -1173,54 +1194,13 @@ function buildExternalCollaboration(pubs, activeIds) {
       count: node.pubIds.size,
       strength: node.strength,
       aggregate: false,
+      priority: labelIds.has(node.id),
     }))
     .sort((a, b) => b.count - a.count || b.strength - a.strength || a.label.localeCompare(b.label));
-  const repeated = ranked.filter((node) => node.count > 1);
-  const namedNodes = (repeated.length >= 16 ? repeated : ranked).slice(0, 48);
-  const namedIds = new Set(namedNodes.map((node) => node.id));
-  const namedEdges = Array.from(edgeMap.values())
-    .filter((edge) => namedIds.has(edge.target))
-    .sort((a, b) => b.count - a.count);
-
-  const remainderBySource = new Map();
-  Array.from(edgeMap.values())
-    .filter((edge) => !namedIds.has(edge.target))
-    .forEach((edge) => {
-      if (!remainderBySource.has(edge.source)) {
-        remainderBySource.set(edge.source, { source: edge.source, count: 0, pubIds: new Set(), authors: new Set() });
-      }
-      const remainder = remainderBySource.get(edge.source);
-      remainder.count += edge.count;
-      edge.pubIds.forEach((id) => remainder.pubIds.add(id));
-      remainder.authors.add(edge.target);
-    });
-
-  const remainderNodes = Array.from(remainderBySource.values())
-    .filter((row) => row.count > 0)
-    .map((row) => ({
-      id: `external-other:${row.source}`,
-      label: "Other external coauthors",
-      shortLabel: "Other external",
-      count: row.pubIds.size,
-      strength: row.count,
-      aggregate: true,
-      anchorId: row.source,
-      authorCount: row.authors.size,
-    }));
-  const remainderEdges = Array.from(remainderBySource.values())
-    .filter((row) => row.count > 0)
-    .map((row) => ({
-      source: row.source,
-      target: `external-other:${row.source}`,
-      count: row.count,
-      pubIds: Array.from(row.pubIds),
-      aggregate: true,
-      authorCount: row.authors.size,
-    }));
 
   return {
-    nodes: [...namedNodes, ...remainderNodes],
-    edges: [...namedEdges, ...remainderEdges],
+    nodes: ranked,
+    edges: selectedEdges,
   };
 }
 
@@ -1242,7 +1222,59 @@ function canonicalExternalAuthor(value) {
 }
 
 function externalAuthorId(author) {
-  return `external:${normalizeSearchText(author)}`;
+  const parts = externalAuthorParts(author);
+  if (!parts.family) return `external:${normalizeSearchText(author)}`;
+  return `external:${parts.family}|${parts.initials || "unknown"}`;
+}
+
+function externalAuthorLabel(author) {
+  return canonicalExternalAuthor(author);
+}
+
+function externalAuthorParts(author) {
+  const raw = canonicalExternalAuthor(author);
+  const normalized = normalizeSearchText(raw);
+  if (!normalized) return { family: "", initials: "" };
+  const commaParts = raw.split(",");
+  if (commaParts.length > 1) {
+    const family = normalizeSearchText(commaParts[0]);
+    const given = normalizeSearchText(commaParts.slice(1).join(" "));
+    return { family, initials: initialsFromGivenText(given) };
+  }
+  const tokens = normalized.split(" ").filter(Boolean);
+  if (!tokens.length) return { family: "", initials: "" };
+  const particles = new Set(["de", "der", "van", "von", "den", "ten", "ter", "da", "di", "la", "le"]);
+  let familyStart = tokens.length - 1;
+  while (familyStart > 0 && particles.has(tokens[familyStart - 1])) familyStart -= 1;
+  const family = tokens.slice(familyStart).join(" ");
+  const given = tokens.slice(0, familyStart).join(" ");
+  return { family, initials: initialsFromGivenText(given) };
+}
+
+function initialsFromGivenText(text) {
+  return normalizeSearchText(text)
+    .split(" ")
+    .filter(Boolean)
+    .map((token) => {
+      if (token.length <= 3) return token.replace(/[^a-z]/g, "");
+      return token[0];
+    })
+    .join("")
+    .slice(0, 4);
+}
+
+function betterExternalLabel(candidate, current) {
+  const next = canonicalExternalAuthor(candidate);
+  const prev = canonicalExternalAuthor(current);
+  if (!next) return false;
+  if (!prev) return true;
+  const nextComma = next.includes(",");
+  const prevComma = prev.includes(",");
+  if (nextComma !== prevComma) return !nextComma;
+  const nextTokens = normalizeSearchText(next).split(" ").filter(Boolean).length;
+  const prevTokens = normalizeSearchText(prev).split(" ").filter(Boolean).length;
+  if (nextTokens !== prevTokens) return nextTokens > prevTokens;
+  return next.length > prev.length;
 }
 
 function authorIsRosterMember(author, roster) {
@@ -1413,7 +1445,7 @@ function drawNetwork(nodes, edges, externalNodes = [], externalEdges = []) {
     circle.appendChild(svgTitle(nodeTitle));
     group.appendChild(circle);
 
-    if (node.aggregate || node.count >= 4) {
+    if (node.aggregate || node.priority) {
       const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
       label.setAttribute("x", node.x);
       label.setAttribute("y", node.y + radius + 10);
@@ -1510,8 +1542,8 @@ function layoutExternalNodes(externalNodes, externalEdges, internalNodes, width,
     groups.get(anchorId).push(node);
   });
 
-  const rx = width * 0.485;
-  const ry = height * 0.445;
+  const rx = width * 0.47;
+  const ry = height * 0.43;
   const placed = [];
   Array.from(groups.entries()).forEach(([anchorId, group], groupIndex) => {
     const anchor = internalById.get(anchorId);
@@ -1520,22 +1552,24 @@ function layoutExternalNodes(externalNodes, externalEdges, internalNodes, width,
       : -Math.PI / 2 + (Math.PI * 2 * groupIndex) / Math.max(1, groups.size);
     const aggregate = group.filter((node) => node.aggregate);
     const named = group.filter((node) => !node.aggregate)
-      .sort((a, b) => b.count - a.count || a.label.localeCompare(b.label));
-    let namedIndex = 0;
-    [...aggregate, ...named].forEach((node) => {
+      .sort((a, b) => Number(b.priority) - Number(a.priority) || b.count - a.count || a.label.localeCompare(b.label));
+    [...aggregate, ...named].forEach((node, index) => {
       let spread = 0;
+      let radialStep = 0;
       if (!node.aggregate) {
-        const ring = Math.floor(namedIndex / 2) + 1;
-        const side = namedIndex % 2 === 0 ? 1 : -1;
-        spread = ring * side * 0.15;
-        namedIndex += 1;
+        const ring = Math.floor(index / 8);
+        const lane = index % 8;
+        spread = (lane - 3.5) * 0.07 + ring * 0.012;
+        radialStep = ring * 13;
       }
       const jitter = hashNumber(node.id) * 0.05;
       const angle = baseAngle + spread + jitter;
+      const localRx = Math.max(width * 0.34, rx - radialStep);
+      const localRy = Math.max(height * 0.32, ry - radialStep * 0.75);
       placed.push({
         ...node,
-        x: clamp(cx + Math.cos(angle) * rx, 18, width - 18),
-        y: clamp(cy + Math.sin(angle) * ry, 18, height - 18),
+        x: clamp(cx + Math.cos(angle) * localRx, 18, width - 18),
+        y: clamp(cy + Math.sin(angle) * localRy, 18, height - 18),
       });
     });
   });
