@@ -37,14 +37,15 @@
       "Zeitschrift für Sozialpsychologie",
       "eLife",
       "Études britanniques contemporaines"
-    ]
+    ],
+    "rosterNote": "Roster includes the originally supplied list plus Jesús Mascareño, added after confirmation that he is part of HRM&OB. His FTE is provisional at 1.00 pending an updated FTE roster."
   },
   "people": [
     {
       "id": "NN",
       "display": "Nguyen, N.H.",
       "name": "Ngoc Han Nguyen",
-      "fte": 1.0,
+      "fte": 1,
       "families": [
         "nguyen"
       ],
@@ -60,13 +61,14 @@
       ],
       "firstInitials": [
         "n"
-      ]
+      ],
+      "photo": "assets/people/nguyen.jpg"
     },
     {
       "id": "MA",
       "display": "Arnold, M.",
       "name": "Miriam Arnold",
-      "fte": 1.0,
+      "fte": 1,
       "families": [
         "arnold"
       ],
@@ -80,13 +82,14 @@
       ],
       "firstInitials": [
         "m"
-      ]
+      ],
+      "photo": "assets/people/arnold.jpg"
     },
     {
       "id": "SB",
       "display": "Berger, S.",
       "name": "Stefan Berger",
-      "fte": 1.0,
+      "fte": 1,
       "families": [
         "berger"
       ],
@@ -100,7 +103,8 @@
       ],
       "firstInitials": [
         "s"
-      ]
+      ],
+      "photo": "assets/people/berger.png"
     },
     {
       "id": "JDB",
@@ -122,13 +126,14 @@
       ],
       "firstInitials": [
         "j"
-      ]
+      ],
+      "photo": "assets/people/debloom.png"
     },
     {
       "id": "JVB",
       "display": "Brake, H.J. van de",
       "name": "Joost van de Brake",
-      "fte": 1.0,
+      "fte": 1,
       "families": [
         "van de brake",
         "brake"
@@ -146,7 +151,8 @@
       "firstInitials": [
         "j",
         "h"
-      ]
+      ],
+      "photo": "assets/people/brake.png"
     },
     {
       "id": "CDD",
@@ -167,13 +173,14 @@
       ],
       "firstInitials": [
         "c"
-      ]
+      ],
+      "photo": "assets/people/dedreu.jpg"
     },
     {
       "id": "OJ",
       "display": "Janssen, O.",
       "name": "Onne Janssen",
-      "fte": 1.0,
+      "fte": 1,
       "families": [
         "janssen"
       ],
@@ -186,13 +193,14 @@
       ],
       "firstInitials": [
         "o"
-      ]
+      ],
+      "photo": "assets/people/janssen.png"
     },
     {
       "id": "JL",
       "display": "Lees, J.M.",
       "name": "Jeff Lees",
-      "fte": 1.0,
+      "fte": 1,
       "families": [
         "lees"
       ],
@@ -207,7 +215,8 @@
       ],
       "firstInitials": [
         "j"
-      ]
+      ],
+      "photo": "assets/people/lees.jpg"
     },
     {
       "id": "LM",
@@ -228,7 +237,32 @@
       ],
       "firstInitials": [
         "l"
-      ]
+      ],
+      "photo": "assets/people/mulder.jpg"
+    },
+    {
+      "id": "JMA",
+      "display": "Mascareño, J.M.",
+      "name": "Jesús Mascareño",
+      "fte": 1,
+      "families": [
+        "mascareño",
+        "mascareno"
+      ],
+      "given": [
+        "jesus",
+        "jes?s",
+        "j",
+        "m"
+      ],
+      "orcid": "0000-0003-2044-9529",
+      "openAlexIds": [
+        "A5080799156"
+      ],
+      "firstInitials": [
+        "j"
+      ],
+      "photo": "assets/people/mascareno.png"
     },
     {
       "id": "BN",
@@ -249,7 +283,8 @@
       ],
       "firstInitials": [
         "b"
-      ]
+      ],
+      "photo": "assets/people/nijstad.jpg"
     },
     {
       "id": "JO",
@@ -265,13 +300,14 @@
       ],
       "firstInitials": [
         "j"
-      ]
+      ],
+      "photo": "assets/people/oedzes.png"
     },
     {
       "id": "FR",
       "display": "Rink, F.A.",
       "name": "Floor Rink",
-      "fte": 1.0,
+      "fte": 1,
       "families": [
         "rink"
       ],
@@ -288,7 +324,8 @@
       ],
       "firstInitials": [
         "f"
-      ]
+      ],
+      "photo": "assets/people/rink.jpg"
     },
     {
       "id": "MR",
@@ -309,7 +346,8 @@
       ],
       "firstInitials": [
         "m"
-      ]
+      ],
+      "photo": "assets/people/ryan.jpg"
     },
     {
       "id": "JS",
@@ -330,13 +368,14 @@
       ],
       "firstInitials": [
         "j"
-      ]
+      ],
+      "photo": "assets/people/stoker.png"
     },
     {
       "id": "GVV",
       "display": "Vegt, G.S. van der",
       "name": "Gerben van der Vegt",
-      "fte": 1.0,
+      "fte": 1,
       "families": [
         "van der vegt",
         "vegt"
@@ -352,13 +391,14 @@
       ],
       "firstInitials": [
         "g"
-      ]
+      ],
+      "photo": "assets/people/vegt.png"
     },
     {
       "id": "TDV",
       "display": "Vries, T.A. de",
       "name": "Thom de Vries",
-      "fte": 1.0,
+      "fte": 1,
       "families": [
         "de vries",
         "vries"
@@ -376,13 +416,14 @@
       ],
       "firstInitials": [
         "t"
-      ]
+      ],
+      "photo": "assets/people/devries.jpg"
     },
     {
       "id": "YY",
       "display": "Yuan, Y.",
       "name": "Yingjie Yuan",
-      "fte": 1.0,
+      "fte": 1,
       "families": [
         "yuan"
       ],
@@ -396,13 +437,14 @@
       ],
       "firstInitials": [
         "y"
-      ]
+      ],
+      "photo": "assets/people/yuan.jpg"
     },
     {
       "id": "JJ",
       "display": "Jordan, J.",
       "name": "Jennifer Jordan",
-      "fte": 0.0,
+      "fte": 0,
       "families": [
         "jordan"
       ],
@@ -412,7 +454,8 @@
       ],
       "firstInitials": [
         "j"
-      ]
+      ],
+      "photo": "assets/people/jordan.jpg"
     }
   ],
   "publications": [
@@ -5319,7 +5362,7 @@
       "sourcePeople": [
         "SB"
       ],
-      "aip": 93.0,
+      "aip": 93,
       "aipJournal": "HUMAN RESOURCE MANAGEMENT",
       "aipCategory": "PSYCHOLOGY, APPLIED",
       "aipMatchMethod": "title",
@@ -7378,7 +7421,7 @@
       "sourcePeople": [
         "SB"
       ],
-      "aip": 93.0,
+      "aip": 93,
       "aipJournal": "HUMAN RESOURCE MANAGEMENT",
       "aipCategory": "PSYCHOLOGY, APPLIED",
       "aipMatchMethod": "title",
@@ -49930,14 +49973,238 @@
         "OpenAlex author matched to University of Groningen for Bloom, J. de"
       ],
       "provisional": true
+    },
+    {
+      "id": "doi:10.1111/caim.12341",
+      "doi": "10.1111/caim.12341",
+      "title": "Envisioning innovation: Does visionary leadership engender team innovative performance through goal alignment?",
+      "year": 2019,
+      "yearSource": "openalex",
+      "journal": "Creativity and Innovation Management",
+      "issns": [
+        "0963-1690",
+        "1467-8691"
+      ],
+      "sourceType": "journal",
+      "publicationKind": "Journal",
+      "rankableJournal": true,
+      "publisher": "",
+      "url": "https://openalex.org/W2996252462",
+      "authors": [
+        "Jesús Mascareño",
+        "Eric F. Rietzschel",
+        "Barbara Wisse"
+      ],
+      "matchedPeople": [
+        "JMA"
+      ],
+      "sourcePeople": [
+        "JMA"
+      ],
+      "aip": 72.068,
+      "aipJournal": "Creativity and Innovation Management",
+      "aipCategory": "MANAGEMENT",
+      "aipMatchMethod": "issn",
+      "subjects": [],
+      "source": "OpenAlex public metadata",
+      "evidence": [
+        "OpenAlex ORCID author profile 0000-0003-2044-9529 matched to Jesús Mascareño."
+      ],
+      "provisional": true
+    },
+    {
+      "id": "doi:10.1080/1359432x.2021.1872544",
+      "doi": "10.1080/1359432x.2021.1872544",
+      "title": "Ambidextrous leadership: opening and closing leader behaviours to facilitate idea generation, idea promotion and idea realization",
+      "year": 2021,
+      "yearSource": "openalex",
+      "journal": "European Journal of Work and Organizational Psychology",
+      "issns": [
+        "1359-432X",
+        "1464-0643"
+      ],
+      "sourceType": "journal",
+      "publicationKind": "Journal",
+      "rankableJournal": true,
+      "publisher": "",
+      "url": "https://openalex.org/W3125687361",
+      "authors": [
+        "Jesús Mascareño",
+        "Eric F. Rietzschel",
+        "Barbara Wisse"
+      ],
+      "matchedPeople": [
+        "JMA"
+      ],
+      "sourcePeople": [
+        "JMA"
+      ],
+      "aip": 90.784,
+      "aipJournal": "European Journal of Work and Organizational Psychology",
+      "aipCategory": "MANAGEMENT",
+      "aipMatchMethod": "issn",
+      "subjects": [],
+      "source": "OpenAlex public metadata",
+      "evidence": [
+        "OpenAlex ORCID author profile 0000-0003-2044-9529 matched to Jesús Mascareño."
+      ],
+      "provisional": true
+    },
+    {
+      "id": "doi:10.1111/caim.12390",
+      "doi": "10.1111/caim.12390",
+      "title": "Leader‐Member Exchange (LMX) and innovation: A test of competing hypotheses",
+      "year": 2020,
+      "yearSource": "openalex",
+      "journal": "Creativity and Innovation Management",
+      "issns": [
+        "0963-1690",
+        "1467-8691"
+      ],
+      "sourceType": "journal",
+      "publicationKind": "Journal",
+      "rankableJournal": true,
+      "publisher": "",
+      "url": "https://openalex.org/W3041256562",
+      "authors": [
+        "Jesús Mascareño",
+        "Eric F. Rietzschel",
+        "Barbara Wisse"
+      ],
+      "matchedPeople": [
+        "JMA"
+      ],
+      "sourcePeople": [
+        "JMA"
+      ],
+      "aip": 72.068,
+      "aipJournal": "Creativity and Innovation Management",
+      "aipCategory": "MANAGEMENT",
+      "aipMatchMethod": "issn",
+      "subjects": [],
+      "source": "OpenAlex public metadata",
+      "evidence": [
+        "OpenAlex ORCID author profile 0000-0003-2044-9529 matched to Jesús Mascareño."
+      ],
+      "provisional": true
+    },
+    {
+      "id": "doi:10.3389/fpsyg.2020.02169",
+      "doi": "10.3389/fpsyg.2020.02169",
+      "title": "The Link Between Employees’ Sense of Vitality and Proactivity: Investigating the Moderating Role of Personal Fear of Invalidity",
+      "year": 2020,
+      "yearSource": "openalex",
+      "journal": "Frontiers in Psychology",
+      "issns": [
+        "1664-1078"
+      ],
+      "sourceType": "journal",
+      "publicationKind": "Journal",
+      "rankableJournal": true,
+      "publisher": "",
+      "url": "https://openalex.org/W3083974167",
+      "authors": [
+        "Burkhard Wörtler",
+        "Nico W. Van Yperen",
+        "Jesús Mascareño",
+        "Dick P. H. Barelds"
+      ],
+      "matchedPeople": [
+        "JMA"
+      ],
+      "sourcePeople": [
+        "JMA"
+      ],
+      "aip": 78.713,
+      "aipJournal": "Frontiers in Psychology",
+      "aipCategory": "PSYCHOLOGY, MULTIDISCIPLINARY",
+      "aipMatchMethod": "issn",
+      "subjects": [],
+      "source": "OpenAlex public metadata",
+      "evidence": [
+        "OpenAlex ORCID author profile 0000-0003-2044-9529 matched to Jesús Mascareño."
+      ],
+      "provisional": true
+    },
+    {
+      "id": "openalex:W1565201456",
+      "doi": "",
+      "title": "Coordination Dynamics in Open-SourceBased Platforms : “The Symbian Foundation Case”",
+      "year": 2010,
+      "yearSource": "openalex",
+      "journal": "KTH Publication Database DiVA (KTH Royal Institute of Technology)",
+      "issns": [],
+      "sourceType": "repository",
+      "publicationKind": "Repository / preprint / non-journal source",
+      "rankableJournal": false,
+      "publisher": "",
+      "url": "https://openalex.org/W1565201456",
+      "authors": [
+        "Imran Mohyuddin",
+        "Jesús Mascareño"
+      ],
+      "matchedPeople": [
+        "JMA"
+      ],
+      "sourcePeople": [
+        "JMA"
+      ],
+      "aip": null,
+      "aipJournal": "",
+      "aipCategory": "",
+      "aipMatchMethod": "",
+      "subjects": [],
+      "source": "OpenAlex public metadata",
+      "evidence": [
+        "OpenAlex ORCID author profile 0000-0003-2044-9529 matched to Jesús Mascareño."
+      ],
+      "provisional": true
+    },
+    {
+      "id": "doi:10.1016/j.chbr.2026.101054",
+      "doi": "10.1016/j.chbr.2026.101054",
+      "title": "When proximal collaboration with AI hinders innovation: The moderating role of idea originality and reliance on AI",
+      "year": 2026,
+      "yearSource": "openalex",
+      "journal": "Computers in Human Behavior Reports",
+      "issns": [
+        "2451-9588"
+      ],
+      "sourceType": "journal",
+      "publicationKind": "Journal",
+      "rankableJournal": true,
+      "publisher": "",
+      "url": "https://openalex.org/W7146986880",
+      "authors": [
+        "Jesús Mascareño",
+        "Burkhard Wörtler",
+        "Aleksandra Przegalinska",
+        "Leon Ciechanowskie"
+      ],
+      "matchedPeople": [
+        "JMA"
+      ],
+      "sourcePeople": [
+        "JMA"
+      ],
+      "aip": 89.622,
+      "aipJournal": "Computers in Human Behavior Reports",
+      "aipCategory": "PSYCHOLOGY, MULTIDISCIPLINARY",
+      "aipMatchMethod": "issn",
+      "subjects": [],
+      "source": "OpenAlex public metadata",
+      "evidence": [
+        "OpenAlex ORCID author profile 0000-0003-2044-9529 matched to Jesús Mascareño."
+      ],
+      "provisional": true
     }
   ],
   "summaries": {
     "personCounts": {
-      "MA": 10,
+      "MA": 9,
       "MR": 126,
       "CDD": 249,
-      "JDB": 78,
+      "JDB": 76,
       "BN": 83,
       "FR": 68,
       "LM": 29,
@@ -49951,7 +50218,8 @@
       "NN": 3,
       "SB": 8,
       "YY": 7,
-      "JO": 4
+      "JO": 4,
+      "JMA": 5
     },
     "journalSummary": [
       {
@@ -49959,7 +50227,6 @@
         "count": 1,
         "aip": 99.918,
         "category": "MULTIDISCIPLINARY SCIENCES",
-        "rankableJournal": true,
         "people": [
           "MR"
         ],
@@ -49972,7 +50239,6 @@
         "count": 2,
         "aip": 99.886,
         "category": "MULTIDISCIPLINARY SCIENCES",
-        "rankableJournal": true,
         "people": [
           "CDD",
           "JL"
@@ -49987,7 +50253,6 @@
         "count": 1,
         "aip": 99.708,
         "category": "NEUROSCIENCES",
-        "rankableJournal": true,
         "people": [
           "CDD"
         ],
@@ -50000,7 +50265,6 @@
         "count": 2,
         "aip": 99.688,
         "category": "BUSINESS",
-        "rankableJournal": true,
         "people": [
           "BN",
           "FR",
@@ -50016,7 +50280,6 @@
         "count": 1,
         "aip": 99.663,
         "category": "PSYCHOLOGY, MULTIDISCIPLINARY",
-        "rankableJournal": true,
         "people": [
           "MR"
         ],
@@ -50029,7 +50292,6 @@
         "count": 2,
         "aip": 99.545,
         "category": "PSYCHOLOGY, MULTIDISCIPLINARY",
-        "rankableJournal": true,
         "people": [
           "BN",
           "CDD"
@@ -50044,7 +50306,6 @@
         "count": 1,
         "aip": 99.463,
         "category": "PSYCHOLOGY, EXPERIMENTAL",
-        "rankableJournal": true,
         "people": [
           "CDD"
         ],
@@ -50057,7 +50318,6 @@
         "count": 1,
         "aip": 99.41,
         "category": "PSYCHOLOGY, MULTIDISCIPLINARY",
-        "rankableJournal": true,
         "people": [
           "BN",
           "FR",
@@ -50072,7 +50332,6 @@
         "count": 1,
         "aip": 99.356,
         "category": "PSYCHOLOGY, APPLIED",
-        "rankableJournal": true,
         "people": [
           "GVV"
         ],
@@ -50085,7 +50344,6 @@
         "count": 3,
         "aip": 99.353,
         "category": "NEUROSCIENCES",
-        "rankableJournal": true,
         "people": [
           "CDD",
           "JL"
@@ -50101,7 +50359,6 @@
         "count": 9,
         "aip": 99.34,
         "category": "NEUROSCIENCES",
-        "rankableJournal": true,
         "people": [
           "BN",
           "CDD",
@@ -50121,7 +50378,6 @@
         "count": 1,
         "aip": 99.322,
         "category": "BUSINESS",
-        "rankableJournal": true,
         "people": [
           "MR"
         ],
@@ -50134,7 +50390,6 @@
         "count": 17,
         "aip": 99.152,
         "category": "BUSINESS",
-        "rankableJournal": true,
         "people": [
           "FR",
           "GVV",
@@ -50161,7 +50416,6 @@
         "count": 3,
         "aip": 99.128,
         "category": "PSYCHOLOGY, SOCIAL",
-        "rankableJournal": true,
         "people": [
           "BN",
           "CDD",
@@ -50178,7 +50432,6 @@
         "count": 12,
         "aip": 98.808,
         "category": "PSYCHOLOGY, APPLIED",
-        "rankableJournal": true,
         "people": [
           "CDD",
           "GVV",
@@ -50207,7 +50460,6 @@
         "count": 2,
         "aip": 98.722,
         "category": "PSYCHOLOGY, MULTIDISCIPLINARY",
-        "rankableJournal": true,
         "people": [
           "CDD",
           "MR"
@@ -50222,7 +50474,6 @@
         "count": 4,
         "aip": 98.7,
         "category": "MULTIDISCIPLINARY SCIENCES",
-        "rankableJournal": true,
         "people": [
           "CDD"
         ],
@@ -50238,7 +50489,6 @@
         "count": 1,
         "aip": 98.625,
         "category": "BUSINESS",
-        "rankableJournal": true,
         "people": [
           "MR"
         ],
@@ -50251,7 +50501,6 @@
         "count": 3,
         "aip": 98.578,
         "category": "MULTIDISCIPLINARY SCIENCES",
-        "rankableJournal": true,
         "people": [
           "CDD",
           "JL",
@@ -50268,7 +50517,6 @@
         "count": 16,
         "aip": 98.367,
         "category": "MANAGEMENT",
-        "rankableJournal": true,
         "people": [
           "CDD",
           "GVV",
@@ -50297,7 +50545,6 @@
         "count": 1,
         "aip": 98.343,
         "category": "PSYCHOLOGY, MULTIDISCIPLINARY",
-        "rankableJournal": true,
         "people": [
           "CDD"
         ],
@@ -50310,7 +50557,6 @@
         "count": 1,
         "aip": 98.227,
         "category": "SOCIAL ISSUES",
-        "rankableJournal": true,
         "people": [
           "FR",
           "MR"
@@ -50324,7 +50570,6 @@
         "count": 9,
         "aip": 98.206,
         "category": "MULTIDISCIPLINARY SCIENCES",
-        "rankableJournal": false,
         "people": [
           "CDD",
           "JL"
@@ -50345,7 +50590,6 @@
         "count": 4,
         "aip": 98.183,
         "category": "MANAGEMENT",
-        "rankableJournal": true,
         "people": [
           "FR",
           "GVV",
@@ -50363,7 +50607,6 @@
         "count": 4,
         "aip": 98.176,
         "category": "MANAGEMENT",
-        "rankableJournal": true,
         "people": [
           "JJ"
         ],
@@ -50378,7 +50621,6 @@
         "count": 20,
         "aip": 97.976,
         "category": "PSYCHOLOGY, SOCIAL",
-        "rankableJournal": true,
         "people": [
           "BN",
           "CDD",
@@ -50404,7 +50646,6 @@
         "count": 2,
         "aip": 97.841,
         "category": "MANAGEMENT",
-        "rankableJournal": true,
         "people": [
           "GVV",
           "JVB",
@@ -50420,7 +50661,6 @@
         "count": 1,
         "aip": 97.811,
         "category": "MANAGEMENT",
-        "rankableJournal": true,
         "people": [
           "BN"
         ],
@@ -50433,7 +50673,6 @@
         "count": 1,
         "aip": 97.77,
         "category": "BUSINESS",
-        "rankableJournal": true,
         "people": [
           "FR",
           "GVV",
@@ -50448,7 +50687,6 @@
         "count": 2,
         "aip": 97.752,
         "category": "PSYCHOLOGY, MULTIDISCIPLINARY",
-        "rankableJournal": true,
         "people": [
           "CDD"
         ],
@@ -50462,7 +50700,6 @@
         "count": 1,
         "aip": 97.685,
         "category": "PSYCHOLOGY, APPLIED",
-        "rankableJournal": true,
         "people": [
           "FR",
           "JDB"
@@ -50476,7 +50713,6 @@
         "count": 8,
         "aip": 97.647,
         "category": "PSYCHOLOGY, MULTIDISCIPLINARY",
-        "rankableJournal": true,
         "people": [
           "CDD",
           "FR",
@@ -50498,7 +50734,6 @@
         "count": 2,
         "aip": 97.641,
         "category": "PSYCHOLOGY, APPLIED",
-        "rankableJournal": true,
         "people": [
           "BN",
           "CDD",
@@ -50514,7 +50749,6 @@
         "count": 1,
         "aip": 97.637,
         "category": "BIOPHYSICS",
-        "rankableJournal": true,
         "people": [
           "BN",
           "CDD"
@@ -50528,7 +50762,6 @@
         "count": 1,
         "aip": 97.603,
         "category": "PSYCHOLOGY, SOCIAL",
-        "rankableJournal": true,
         "people": [
           "BN",
           "CDD"
@@ -50542,7 +50775,6 @@
         "count": 1,
         "aip": 97.573,
         "category": "MANAGEMENT",
-        "rankableJournal": true,
         "people": [
           "NN"
         ],
@@ -50555,7 +50787,6 @@
         "count": 15,
         "aip": 97.556,
         "category": "MANAGEMENT",
-        "rankableJournal": true,
         "people": [
           "FR",
           "GVV",
@@ -50582,7 +50813,6 @@
         "count": 17,
         "aip": 97.389,
         "category": "MANAGEMENT",
-        "rankableJournal": true,
         "people": [
           "BN",
           "CDD",
@@ -50615,7 +50845,6 @@
         "count": 1,
         "aip": 96.797,
         "category": "MULTIDISCIPLINARY SCIENCES",
-        "rankableJournal": true,
         "people": [
           "JL"
         ],
@@ -50628,7 +50857,6 @@
         "count": 18,
         "aip": 96.729,
         "category": "PSYCHOLOGY, SOCIAL",
-        "rankableJournal": true,
         "people": [
           "BN",
           "CDD",
@@ -50658,20 +50886,16 @@
       },
       {
         "journal": "Journal of Occupational Health Psychology",
-        "count": 6,
+        "count": 4,
         "aip": 96.526,
         "category": "PSYCHOLOGY, APPLIED",
-        "rankableJournal": true,
         "people": [
           "FR",
-          "JDB",
-          "MA"
+          "JDB"
         ],
         "years": [
           2016,
           2017,
-          2019,
-          2020,
           2023,
           2024
         ]
@@ -50681,7 +50905,6 @@
         "count": 1,
         "aip": 96.458,
         "category": "MANAGEMENT",
-        "rankableJournal": true,
         "people": [
           "GVV"
         ],
@@ -50694,7 +50917,6 @@
         "count": 2,
         "aip": 96.348,
         "category": "MANAGEMENT",
-        "rankableJournal": true,
         "people": [
           "BN",
           "NN"
@@ -50709,7 +50931,6 @@
         "count": 1,
         "aip": 96.101,
         "category": "PSYCHOLOGY, MULTIDISCIPLINARY",
-        "rankableJournal": true,
         "people": [
           "BN",
           "CDD"
@@ -50723,7 +50944,6 @@
         "count": 2,
         "aip": 96.068,
         "category": "PSYCHOLOGY, SOCIAL",
-        "rankableJournal": true,
         "people": [
           "MR"
         ],
@@ -50737,7 +50957,6 @@
         "count": 1,
         "aip": 95.943,
         "category": "INFORMATION SCIENCE & LIBRARY SCIENCE",
-        "rankableJournal": true,
         "people": [
           "JDB"
         ],
@@ -50750,7 +50969,6 @@
         "count": 5,
         "aip": 95.864,
         "category": "BIOLOGY",
-        "rankableJournal": true,
         "people": [
           "CDD",
           "JL"
@@ -50765,7 +50983,6 @@
         "count": 4,
         "aip": 95.855,
         "category": "PSYCHOLOGY, MULTIDISCIPLINARY",
-        "rankableJournal": true,
         "people": [
           "CDD",
           "FR",
@@ -50783,7 +51000,6 @@
         "count": 1,
         "aip": 95.641,
         "category": "INTERNATIONAL RELATIONS",
-        "rankableJournal": true,
         "people": [
           "CDD"
         ],
@@ -50796,7 +51012,6 @@
         "count": 2,
         "aip": 95.623,
         "category": "MANAGEMENT",
-        "rankableJournal": true,
         "people": [
           "FR"
         ],
@@ -50809,7 +51024,6 @@
         "count": 1,
         "aip": 95.482,
         "category": "PSYCHOLOGY, APPLIED",
-        "rankableJournal": true,
         "people": [
           "MR"
         ],
@@ -50822,7 +51036,6 @@
         "count": 2,
         "aip": 95.463,
         "category": "MANAGEMENT",
-        "rankableJournal": true,
         "people": [
           "BN",
           "CDD"
@@ -50837,7 +51050,6 @@
         "count": 7,
         "aip": 95.422,
         "category": "PSYCHOLOGY, SOCIAL",
-        "rankableJournal": true,
         "people": [
           "BN",
           "CDD",
@@ -50858,7 +51070,6 @@
         "count": 2,
         "aip": 95.404,
         "category": "SOCIAL SCIENCES, INTERDISCIPLINARY",
-        "rankableJournal": true,
         "people": [
           "JVB",
           "OJ"
@@ -50873,7 +51084,6 @@
         "count": 3,
         "aip": 95.356,
         "category": "PSYCHOLOGY, EXPERIMENTAL",
-        "rankableJournal": true,
         "people": [
           "CDD"
         ],
@@ -50888,7 +51098,6 @@
         "count": 1,
         "aip": 95.356,
         "category": "PSYCHOLOGY, DEVELOPMENTAL",
-        "rankableJournal": true,
         "people": [
           "CDD"
         ],
@@ -50901,7 +51110,6 @@
         "count": 1,
         "aip": 95.247,
         "category": "MANAGEMENT",
-        "rankableJournal": true,
         "people": [
           "CDD"
         ],
@@ -50914,7 +51122,6 @@
         "count": 1,
         "aip": 95.161,
         "category": "DEVELOPMENT STUDIES",
-        "rankableJournal": true,
         "people": [
           "JS"
         ],
@@ -50927,7 +51134,6 @@
         "count": 1,
         "aip": 95.102,
         "category": "NEUROSCIENCES",
-        "rankableJournal": true,
         "people": [
           "CDD"
         ],
@@ -50940,7 +51146,6 @@
         "count": 2,
         "aip": 94.932,
         "category": "MANAGEMENT",
-        "rankableJournal": true,
         "people": [
           "GVV",
           "TDV"
@@ -50955,7 +51160,6 @@
         "count": 1,
         "aip": 94.638,
         "category": "MANAGEMENT",
-        "rankableJournal": true,
         "people": [
           "JDB"
         ],
@@ -50968,7 +51172,6 @@
         "count": 9,
         "aip": 94.519,
         "category": "BUSINESS",
-        "rankableJournal": true,
         "people": [
           "BN",
           "JDB",
@@ -50990,7 +51193,6 @@
         "count": 1,
         "aip": 94.329,
         "category": "PSYCHOLOGY, EDUCATIONAL",
-        "rankableJournal": true,
         "people": [
           "MR"
         ],
@@ -51003,7 +51205,6 @@
         "count": 23,
         "aip": 94.249,
         "category": "PSYCHOLOGY, SOCIAL",
-        "rankableJournal": true,
         "people": [
           "BN",
           "CDD",
@@ -51040,7 +51241,6 @@
         "count": 2,
         "aip": 94.228,
         "category": "DEVELOPMENT STUDIES",
-        "rankableJournal": true,
         "people": [
           "FR",
           "JS"
@@ -51055,7 +51255,6 @@
         "count": 35,
         "aip": 94.22,
         "category": "PSYCHOLOGY, SOCIAL",
-        "rankableJournal": true,
         "people": [
           "BN",
           "CDD",
@@ -51093,7 +51292,6 @@
         "count": 1,
         "aip": 94.152,
         "category": "SOCIAL ISSUES",
-        "rankableJournal": true,
         "people": [
           "MR"
         ],
@@ -51106,7 +51304,6 @@
         "count": 1,
         "aip": 94.115,
         "category": "GEOGRAPHY",
-        "rankableJournal": true,
         "people": [
           "JS"
         ],
@@ -51119,7 +51316,6 @@
         "count": 6,
         "aip": 94.11,
         "category": "PSYCHOLOGY, SOCIAL",
-        "rankableJournal": true,
         "people": [
           "BN",
           "CDD",
@@ -51140,7 +51336,6 @@
         "count": 7,
         "aip": 94.09,
         "category": "PSYCHOLOGY, APPLIED",
-        "rankableJournal": true,
         "people": [
           "GVV",
           "JDB",
@@ -51162,7 +51357,6 @@
         "count": 5,
         "aip": 93.901,
         "category": "PSYCHOLOGY, MULTIDISCIPLINARY",
-        "rankableJournal": true,
         "people": [
           "MR"
         ],
@@ -51179,7 +51373,6 @@
         "count": 10,
         "aip": 93.829,
         "category": "PSYCHOLOGY, APPLIED",
-        "rankableJournal": true,
         "people": [
           "BN",
           "CDD",
@@ -51209,7 +51402,6 @@
         "count": 1,
         "aip": 93.663,
         "category": "PSYCHOLOGY, MULTIDISCIPLINARY",
-        "rankableJournal": true,
         "people": [
           "MR"
         ],
@@ -51222,7 +51414,6 @@
         "count": 14,
         "aip": 93.287,
         "category": "MANAGEMENT",
-        "rankableJournal": true,
         "people": [
           "FR",
           "GVV",
@@ -51250,7 +51441,6 @@
         "count": 1,
         "aip": 93.278,
         "category": "PSYCHOLOGY, SOCIAL",
-        "rankableJournal": true,
         "people": [
           "BN",
           "CDD"
@@ -51264,7 +51454,6 @@
         "count": 4,
         "aip": 93.128,
         "category": "ENVIRONMENTAL STUDIES",
-        "rankableJournal": true,
         "people": [
           "JDB"
         ],
@@ -51279,7 +51468,6 @@
         "count": 1,
         "aip": 93.119,
         "category": "INFORMATION SCIENCE & LIBRARY SCIENCE",
-        "rankableJournal": true,
         "people": [
           "SB"
         ],
@@ -51290,9 +51478,8 @@
       {
         "journal": "HUMAN RESOURCE MANAGEMENT",
         "count": 2,
-        "aip": 93.0,
+        "aip": 93,
         "category": "PSYCHOLOGY, APPLIED",
-        "rankableJournal": true,
         "people": [
           "SB"
         ],
@@ -51306,7 +51493,6 @@
         "count": 1,
         "aip": 92.954,
         "category": "PUBLIC, ENVIRONMENTAL & OCCUPATIONAL HEALTH",
-        "rankableJournal": true,
         "people": [
           "LM"
         ],
@@ -51319,7 +51505,6 @@
         "count": 3,
         "aip": 92.721,
         "category": "EVOLUTIONARY BIOLOGY",
-        "rankableJournal": false,
         "people": [
           "CDD"
         ],
@@ -51334,7 +51519,6 @@
         "count": 1,
         "aip": 92.719,
         "category": "PSYCHOLOGY, EXPERIMENTAL",
-        "rankableJournal": true,
         "people": [
           "CDD"
         ],
@@ -51347,7 +51531,6 @@
         "count": 7,
         "aip": 92.38,
         "category": "PSYCHOLOGY, SOCIAL",
-        "rankableJournal": true,
         "people": [
           "CDD",
           "FR",
@@ -51368,7 +51551,6 @@
         "count": 2,
         "aip": 92.162,
         "category": "PSYCHOLOGY, EXPERIMENTAL",
-        "rankableJournal": true,
         "people": [
           "BN",
           "CDD",
@@ -51384,7 +51566,6 @@
         "count": 1,
         "aip": 91.725,
         "category": "URBAN STUDIES",
-        "rankableJournal": true,
         "people": [
           "JDB"
         ],
@@ -51397,7 +51578,6 @@
         "count": 1,
         "aip": 91.645,
         "category": "SOCIAL SCIENCES, INTERDISCIPLINARY",
-        "rankableJournal": true,
         "people": [
           "MR"
         ],
@@ -51410,7 +51590,6 @@
         "count": 3,
         "aip": 91.476,
         "category": "BUSINESS",
-        "rankableJournal": true,
         "people": [
           "LM",
           "OJ",
@@ -51427,7 +51606,6 @@
         "count": 5,
         "aip": 91.13,
         "category": "PSYCHOLOGY",
-        "rankableJournal": true,
         "people": [
           "CDD"
         ],
@@ -51443,7 +51621,6 @@
         "count": 28,
         "aip": 90.98,
         "category": "PSYCHOLOGY, SOCIAL",
-        "rankableJournal": true,
         "people": [
           "BN",
           "CDD",
@@ -51482,7 +51659,6 @@
         "count": 23,
         "aip": 90.845,
         "category": "PSYCHOLOGY, SOCIAL",
-        "rankableJournal": true,
         "people": [
           "BN",
           "CDD",
@@ -51515,7 +51691,6 @@
         "count": 6,
         "aip": 90.84,
         "category": "BUSINESS",
-        "rankableJournal": true,
         "people": [
           "CDD",
           "FR",
@@ -51531,16 +51706,16 @@
       },
       {
         "journal": "European Journal of Work and Organizational Psychology",
-        "count": 19,
+        "count": 20,
         "aip": 90.784,
         "category": "MANAGEMENT",
-        "rankableJournal": true,
         "people": [
           "BN",
           "CDD",
           "FR",
           "GVV",
           "JDB",
+          "JMA",
           "JS",
           "MR",
           "OJ"
@@ -51557,6 +51732,7 @@
           2016,
           2017,
           2018,
+          2021,
           2022
         ]
       },
@@ -51565,7 +51741,6 @@
         "count": 1,
         "aip": 90.654,
         "category": "PSYCHOLOGY, APPLIED",
-        "rankableJournal": true,
         "people": [
           "MR"
         ],
@@ -51578,7 +51753,6 @@
         "count": 3,
         "aip": 90.415,
         "category": "PSYCHOLOGY, MULTIDISCIPLINARY",
-        "rankableJournal": true,
         "people": [
           "BN",
           "MR"
@@ -51594,7 +51768,6 @@
         "count": 1,
         "aip": 90.414,
         "category": "MULTIDISCIPLINARY SCIENCES",
-        "rankableJournal": true,
         "people": [
           "CDD"
         ],
@@ -51607,7 +51780,6 @@
         "count": 1,
         "aip": 90.226,
         "category": "MANAGEMENT",
-        "rankableJournal": true,
         "people": [
           "FR",
           "JS"
@@ -51621,7 +51793,6 @@
         "count": 1,
         "aip": 90.18,
         "category": "PSYCHOLOGY, SOCIAL",
-        "rankableJournal": true,
         "people": [
           "CDD"
         ],
@@ -51634,7 +51805,6 @@
         "count": 1,
         "aip": 90.04,
         "category": "BUSINESS",
-        "rankableJournal": true,
         "people": [
           "JJ"
         ],
@@ -51647,7 +51817,6 @@
         "count": 3,
         "aip": 89.967,
         "category": "PSYCHOLOGY, DEVELOPMENTAL",
-        "rankableJournal": true,
         "people": [
           "MR"
         ],
@@ -51661,7 +51830,6 @@
         "count": 5,
         "aip": 89.763,
         "category": "PSYCHOLOGY, APPLIED",
-        "rankableJournal": true,
         "people": [
           "GVV",
           "JS",
@@ -51677,11 +51845,22 @@
         ]
       },
       {
+        "journal": "Computers in Human Behavior Reports",
+        "count": 1,
+        "aip": 89.622,
+        "category": "PSYCHOLOGY, MULTIDISCIPLINARY",
+        "people": [
+          "JMA"
+        ],
+        "years": [
+          2026
+        ]
+      },
+      {
         "journal": "GENDER WORK AND ORGANIZATION",
         "count": 1,
         "aip": 89.253,
         "category": "WOMENS STUDIES",
-        "rankableJournal": true,
         "people": [
           "MR"
         ],
@@ -51694,7 +51873,6 @@
         "count": 1,
         "aip": 89.133,
         "category": "PUBLIC ADMINISTRATION",
-        "rankableJournal": true,
         "people": [
           "FR"
         ],
@@ -51707,7 +51885,6 @@
         "count": 1,
         "aip": 89.127,
         "category": "PSYCHIATRY",
-        "rankableJournal": true,
         "people": [
           "CDD"
         ],
@@ -51720,7 +51897,6 @@
         "count": 1,
         "aip": 88.97,
         "category": "HOSPITALITY, LEISURE, SPORT & TOURISM",
-        "rankableJournal": true,
         "people": [
           "JDB"
         ],
@@ -51733,7 +51909,6 @@
         "count": 1,
         "aip": 88.777,
         "category": "BUSINESS, FINANCE",
-        "rankableJournal": true,
         "people": [
           "FR"
         ],
@@ -51746,7 +51921,6 @@
         "count": 1,
         "aip": 88.411,
         "category": "PSYCHOLOGY, EXPERIMENTAL",
-        "rankableJournal": true,
         "people": [
           "CDD"
         ],
@@ -51759,7 +51933,6 @@
         "count": 1,
         "aip": 88.407,
         "category": "BUSINESS, FINANCE",
-        "rankableJournal": true,
         "people": [
           "FR",
           "LM"
@@ -51773,7 +51946,6 @@
         "count": 1,
         "aip": 87.29,
         "category": "PSYCHOLOGY, SOCIAL",
-        "rankableJournal": true,
         "people": [
           "LM"
         ],
@@ -51786,7 +51958,6 @@
         "count": 2,
         "aip": 86.849,
         "category": "NEUROSCIENCES",
-        "rankableJournal": true,
         "people": [
           "CDD"
         ],
@@ -51800,7 +51971,6 @@
         "count": 5,
         "aip": 86.688,
         "category": "MANAGEMENT",
-        "rankableJournal": true,
         "people": [
           "JDB",
           "JS",
@@ -51819,7 +51989,6 @@
         "count": 4,
         "aip": 85.619,
         "category": "PSYCHOLOGY, MULTIDISCIPLINARY",
-        "rankableJournal": true,
         "people": [
           "CDD",
           "FR",
@@ -51838,7 +52007,6 @@
         "count": 2,
         "aip": 85.334,
         "category": "SOCIAL SCIENCES, INTERDISCIPLINARY",
-        "rankableJournal": true,
         "people": [
           "JS",
           "MR"
@@ -51853,7 +52021,6 @@
         "count": 2,
         "aip": 84.914,
         "category": "MANAGEMENT",
-        "rankableJournal": true,
         "people": [
           "CDD",
           "JS"
@@ -51868,7 +52035,6 @@
         "count": 2,
         "aip": 84.785,
         "category": "PSYCHOLOGY, MULTIDISCIPLINARY",
-        "rankableJournal": true,
         "people": [
           "JDB"
         ],
@@ -51882,7 +52048,6 @@
         "count": 3,
         "aip": 84.65,
         "category": "PSYCHOLOGY, EXPERIMENTAL",
-        "rankableJournal": true,
         "people": [
           "BN",
           "CDD"
@@ -51898,7 +52063,6 @@
         "count": 4,
         "aip": 84.12,
         "category": "PUBLIC, ENVIRONMENTAL & OCCUPATIONAL HEALTH",
-        "rankableJournal": true,
         "people": [
           "FR",
           "JDB"
@@ -51914,7 +52078,6 @@
         "count": 5,
         "aip": 83.745,
         "category": "MULTIDISCIPLINARY SCIENCES",
-        "rankableJournal": true,
         "people": [
           "CDD"
         ],
@@ -51930,7 +52093,6 @@
         "count": 1,
         "aip": 83.663,
         "category": "PSYCHOLOGY, APPLIED",
-        "rankableJournal": true,
         "people": [
           "JDB"
         ],
@@ -51943,7 +52105,6 @@
         "count": 1,
         "aip": 83.126,
         "category": "PSYCHOLOGY, SOCIAL",
-        "rankableJournal": true,
         "people": [
           "OJ"
         ],
@@ -51956,7 +52117,6 @@
         "count": 4,
         "aip": 83.115,
         "category": "MULTIDISCIPLINARY SCIENCES",
-        "rankableJournal": true,
         "people": [
           "CDD",
           "JL"
@@ -51972,7 +52132,6 @@
         "count": 1,
         "aip": 82.694,
         "category": "PSYCHOLOGY",
-        "rankableJournal": true,
         "people": [
           "JS"
         ],
@@ -51985,7 +52144,6 @@
         "count": 4,
         "aip": 82.668,
         "category": "PSYCHOLOGY",
-        "rankableJournal": true,
         "people": [
           "JDB"
         ],
@@ -52001,7 +52159,6 @@
         "count": 4,
         "aip": 82.147,
         "category": "MANAGEMENT",
-        "rankableJournal": true,
         "people": [
           "CDD",
           "GVV",
@@ -52019,7 +52176,6 @@
         "count": 3,
         "aip": 81.891,
         "category": "PSYCHOLOGY, APPLIED",
-        "rankableJournal": true,
         "people": [
           "BN",
           "CDD"
@@ -52035,7 +52191,6 @@
         "count": 2,
         "aip": 81.804,
         "category": "HEALTH CARE SCIENCES & SERVICES",
-        "rankableJournal": true,
         "people": [
           "JDB",
           "OJ"
@@ -52050,7 +52205,6 @@
         "count": 1,
         "aip": 81.247,
         "category": "SPORT SCIENCES",
-        "rankableJournal": true,
         "people": [
           "JDB"
         ],
@@ -52063,7 +52217,6 @@
         "count": 1,
         "aip": 81.12,
         "category": "WOMENS STUDIES",
-        "rankableJournal": true,
         "people": [
           "MR"
         ],
@@ -52076,7 +52229,6 @@
         "count": 1,
         "aip": 81.105,
         "category": "PSYCHIATRY",
-        "rankableJournal": true,
         "people": [
           "MA"
         ],
@@ -52089,7 +52241,6 @@
         "count": 1,
         "aip": 81.05,
         "category": "NUTRITION & DIETETICS",
-        "rankableJournal": true,
         "people": [
           "JDB"
         ],
@@ -52102,7 +52253,6 @@
         "count": 1,
         "aip": 80.991,
         "category": "PSYCHOLOGY, SOCIAL",
-        "rankableJournal": true,
         "people": [
           "MR"
         ],
@@ -52115,7 +52265,6 @@
         "count": 2,
         "aip": 80.828,
         "category": "PSYCHOLOGY, SOCIAL",
-        "rankableJournal": true,
         "people": [
           "BN",
           "MR"
@@ -52130,7 +52279,6 @@
         "count": 3,
         "aip": 80.515,
         "category": "PSYCHOLOGY, SOCIAL",
-        "rankableJournal": true,
         "people": [
           "BN",
           "OJ"
@@ -52146,7 +52294,6 @@
         "count": 4,
         "aip": 80.449,
         "category": "PSYCHOLOGY, SOCIAL",
-        "rankableJournal": true,
         "people": [
           "JDB",
           "JJ",
@@ -52162,7 +52309,6 @@
         "count": 1,
         "aip": 80.205,
         "category": "ERGONOMICS",
-        "rankableJournal": true,
         "people": [
           "CDD"
         ],
@@ -52175,7 +52321,6 @@
         "count": 1,
         "aip": 80.066,
         "category": "MEDICINE, GENERAL & INTERNAL",
-        "rankableJournal": true,
         "people": [
           "MR"
         ],
@@ -52188,7 +52333,6 @@
         "count": 3,
         "aip": 80.058,
         "category": "PSYCHOLOGY",
-        "rankableJournal": true,
         "people": [
           "BN",
           "CDD"
@@ -52204,7 +52348,6 @@
         "count": 2,
         "aip": 79.719,
         "category": "PSYCHOLOGY, MULTIDISCIPLINARY",
-        "rankableJournal": true,
         "people": [
           "JDB",
           "LM"
@@ -52219,7 +52362,6 @@
         "count": 1,
         "aip": 79.153,
         "category": "CRIMINOLOGY & PENOLOGY",
-        "rankableJournal": true,
         "people": [
           "MR"
         ],
@@ -52229,16 +52371,16 @@
       },
       {
         "journal": "Frontiers in Psychology",
-        "count": 23,
+        "count": 24,
         "aip": 78.713,
         "category": "PSYCHOLOGY, MULTIDISCIPLINARY",
-        "rankableJournal": true,
         "people": [
           "BN",
           "CDD",
           "FR",
           "JDB",
           "JJ",
+          "JMA",
           "JS",
           "LM",
           "MA",
@@ -52262,7 +52404,6 @@
         "count": 2,
         "aip": 78.593,
         "category": "PSYCHOLOGY, EDUCATIONAL",
-        "rankableJournal": true,
         "people": [
           "MR"
         ],
@@ -52276,7 +52417,6 @@
         "count": 1,
         "aip": 78.519,
         "category": "PSYCHOLOGY, SOCIAL",
-        "rankableJournal": true,
         "people": [
           "CDD"
         ],
@@ -52289,7 +52429,6 @@
         "count": 1,
         "aip": 78.318,
         "category": "PSYCHOLOGY, SOCIAL",
-        "rankableJournal": true,
         "people": [
           "MR"
         ],
@@ -52302,7 +52441,6 @@
         "count": 1,
         "aip": 78.247,
         "category": "PSYCHOLOGY, SOCIAL",
-        "rankableJournal": true,
         "people": [
           "CDD"
         ],
@@ -52315,7 +52453,6 @@
         "count": 1,
         "aip": 78.222,
         "category": "BEHAVIORAL SCIENCES",
-        "rankableJournal": true,
         "people": [
           "CDD"
         ],
@@ -52328,7 +52465,6 @@
         "count": 8,
         "aip": 77.22,
         "category": "MULTIDISCIPLINARY SCIENCES",
-        "rankableJournal": true,
         "people": [
           "CDD",
           "JDB",
@@ -52351,7 +52487,6 @@
         "count": 10,
         "aip": 77.218,
         "category": "PSYCHOLOGY, SOCIAL",
-        "rankableJournal": true,
         "people": [
           "BN",
           "CDD",
@@ -52378,7 +52513,6 @@
         "count": 2,
         "aip": 77.116,
         "category": "MANAGEMENT",
-        "rankableJournal": true,
         "people": [
           "CDD",
           "GVV"
@@ -52393,7 +52527,6 @@
         "count": 1,
         "aip": 77.085,
         "category": "COMMUNICATION",
-        "rankableJournal": true,
         "people": [
           "MR"
         ],
@@ -52406,7 +52539,6 @@
         "count": 2,
         "aip": 76.83,
         "category": "PSYCHOLOGY",
-        "rankableJournal": true,
         "people": [
           "CDD"
         ],
@@ -52420,7 +52552,6 @@
         "count": 1,
         "aip": 76.6,
         "category": "SOCIOLOGY",
-        "rankableJournal": true,
         "people": [
           "MR"
         ],
@@ -52433,7 +52564,6 @@
         "count": 1,
         "aip": 76.231,
         "category": "CRIMINOLOGY & PENOLOGY",
-        "rankableJournal": true,
         "people": [
           "MR"
         ],
@@ -52446,7 +52576,6 @@
         "count": 2,
         "aip": 75.849,
         "category": "NURSING",
-        "rankableJournal": true,
         "people": [
           "JDB",
           "LM"
@@ -52461,7 +52590,6 @@
         "count": 1,
         "aip": 75.476,
         "category": "PSYCHOLOGY, DEVELOPMENTAL",
-        "rankableJournal": true,
         "people": [
           "MR"
         ],
@@ -52474,7 +52602,6 @@
         "count": 1,
         "aip": 75.407,
         "category": "SOCIOLOGY",
-        "rankableJournal": true,
         "people": [
           "MR"
         ],
@@ -52487,7 +52614,6 @@
         "count": 2,
         "aip": 75.154,
         "category": "PUBLIC, ENVIRONMENTAL & OCCUPATIONAL HEALTH",
-        "rankableJournal": true,
         "people": [
           "JDB",
           "JVB",
@@ -52503,7 +52629,6 @@
         "count": 2,
         "aip": 74.723,
         "category": "PSYCHOLOGY, SOCIAL",
-        "rankableJournal": true,
         "people": [
           "CDD"
         ],
@@ -52517,7 +52642,6 @@
         "count": 2,
         "aip": 74.152,
         "category": "PSYCHOLOGY, SOCIAL",
-        "rankableJournal": true,
         "people": [
           "MR"
         ],
@@ -52531,7 +52655,6 @@
         "count": 1,
         "aip": 73.927,
         "category": "PSYCHOLOGY, EDUCATIONAL",
-        "rankableJournal": true,
         "people": [
           "BN"
         ],
@@ -52544,7 +52667,6 @@
         "count": 2,
         "aip": 73.575,
         "category": "PSYCHOLOGY, SOCIAL",
-        "rankableJournal": true,
         "people": [
           "JS",
           "MR"
@@ -52559,7 +52681,6 @@
         "count": 1,
         "aip": 73.488,
         "category": "PSYCHOLOGY, SOCIAL",
-        "rankableJournal": true,
         "people": [
           "GVV"
         ],
@@ -52572,7 +52693,6 @@
         "count": 1,
         "aip": 73.284,
         "category": "PSYCHOLOGY, APPLIED",
-        "rankableJournal": true,
         "people": [
           "MR"
         ],
@@ -52585,7 +52705,6 @@
         "count": 1,
         "aip": 73.239,
         "category": "SOCIAL SCIENCES, INTERDISCIPLINARY",
-        "rankableJournal": true,
         "people": [
           "OJ"
         ],
@@ -52598,7 +52717,6 @@
         "count": 1,
         "aip": 73.122,
         "category": "REHABILITATION",
-        "rankableJournal": true,
         "people": [
           "MR"
         ],
@@ -52611,7 +52729,6 @@
         "count": 1,
         "aip": 72.664,
         "category": "SOCIOLOGY",
-        "rankableJournal": true,
         "people": [
           "JL"
         ],
@@ -52624,7 +52741,6 @@
         "count": 1,
         "aip": 72.596,
         "category": "EDUCATION & EDUCATIONAL RESEARCH",
-        "rankableJournal": true,
         "people": [
           "MR"
         ],
@@ -52637,7 +52753,6 @@
         "count": 1,
         "aip": 72.443,
         "category": "PSYCHOLOGY, APPLIED",
-        "rankableJournal": true,
         "people": [
           "JS"
         ],
@@ -52646,11 +52761,23 @@
         ]
       },
       {
+        "journal": "Creativity and Innovation Management",
+        "count": 2,
+        "aip": 72.068,
+        "category": "MANAGEMENT",
+        "people": [
+          "JMA"
+        ],
+        "years": [
+          2019,
+          2020
+        ]
+      },
+      {
         "journal": "INTERNATIONAL ARCHIVES OF OCCUPATIONAL AND ENVIRONMENTAL HEALTH",
         "count": 2,
         "aip": 70.45,
         "category": "PUBLIC, ENVIRONMENTAL & OCCUPATIONAL HEALTH",
-        "rankableJournal": true,
         "people": [
           "JDB"
         ],
@@ -52664,7 +52791,6 @@
         "count": 2,
         "aip": 70.425,
         "category": "PSYCHOLOGY, SOCIAL",
-        "rankableJournal": true,
         "people": [
           "BN",
           "CDD"
@@ -52679,7 +52805,6 @@
         "count": 3,
         "aip": 70.293,
         "category": "PSYCHOLOGY, SOCIAL",
-        "rankableJournal": true,
         "people": [
           "CDD",
           "FR"
@@ -52695,7 +52820,6 @@
         "count": 1,
         "aip": 69.599,
         "category": "PUBLIC, ENVIRONMENTAL & OCCUPATIONAL HEALTH",
-        "rankableJournal": true,
         "people": [
           "FR",
           "JDB"
@@ -52709,7 +52833,6 @@
         "count": 1,
         "aip": 69.506,
         "category": "HOSPITALITY, LEISURE, SPORT & TOURISM",
-        "rankableJournal": true,
         "people": [
           "JDB"
         ],
@@ -52722,7 +52845,6 @@
         "count": 1,
         "aip": 69.307,
         "category": "PSYCHOLOGY, MULTIDISCIPLINARY",
-        "rankableJournal": true,
         "people": [
           "JDB"
         ],
@@ -52735,7 +52857,6 @@
         "count": 1,
         "aip": 69.004,
         "category": "SOCIAL SCIENCES, INTERDISCIPLINARY",
-        "rankableJournal": true,
         "people": [
           "MR"
         ],
@@ -52748,7 +52869,6 @@
         "count": 1,
         "aip": 68.673,
         "category": "PUBLIC, ENVIRONMENTAL & OCCUPATIONAL HEALTH",
-        "rankableJournal": true,
         "people": [
           "JDB"
         ],
@@ -52761,7 +52881,6 @@
         "count": 2,
         "aip": 66.603,
         "category": "PSYCHOLOGY, MULTIDISCIPLINARY",
-        "rankableJournal": true,
         "people": [
           "BN"
         ],
@@ -52775,7 +52894,6 @@
         "count": 1,
         "aip": 66.415,
         "category": "PSYCHOLOGY, APPLIED",
-        "rankableJournal": true,
         "people": [
           "JS"
         ],
@@ -52788,7 +52906,6 @@
         "count": 1,
         "aip": 66.297,
         "category": "PSYCHOLOGY, APPLIED",
-        "rankableJournal": true,
         "people": [
           "MR"
         ],
@@ -52801,7 +52918,6 @@
         "count": 2,
         "aip": 65.974,
         "category": "MEDICINE, GENERAL & INTERNAL",
-        "rankableJournal": true,
         "people": [
           "LM"
         ],
@@ -52815,7 +52931,6 @@
         "count": 1,
         "aip": 65.968,
         "category": "REHABILITATION",
-        "rankableJournal": true,
         "people": [
           "MR"
         ],
@@ -52828,7 +52943,6 @@
         "count": 1,
         "aip": 65.534,
         "category": "SOCIAL SCIENCES, BIOMEDICAL",
-        "rankableJournal": true,
         "people": [
           "FR"
         ],
@@ -52841,7 +52955,6 @@
         "count": 1,
         "aip": 65.269,
         "category": "EDUCATION & EDUCATIONAL RESEARCH",
-        "rankableJournal": true,
         "people": [
           "MR"
         ],
@@ -52854,7 +52967,6 @@
         "count": 2,
         "aip": 64.981,
         "category": "PSYCHOLOGY, MULTIDISCIPLINARY",
-        "rankableJournal": true,
         "people": [
           "FR",
           "GVV",
@@ -52870,7 +52982,6 @@
         "count": 3,
         "aip": 62.523,
         "category": "PSYCHOLOGY, SOCIAL",
-        "rankableJournal": true,
         "people": [
           "BN",
           "CDD",
@@ -52886,7 +52997,6 @@
         "count": 1,
         "aip": 62.497,
         "category": "WOMENS STUDIES",
-        "rankableJournal": true,
         "people": [
           "MR"
         ],
@@ -52899,7 +53009,6 @@
         "count": 1,
         "aip": 62.372,
         "category": "MANAGEMENT",
-        "rankableJournal": true,
         "people": [
           "NN"
         ],
@@ -52912,7 +53021,6 @@
         "count": 1,
         "aip": 61.307,
         "category": "PSYCHOLOGY, APPLIED",
-        "rankableJournal": true,
         "people": [
           "BN"
         ],
@@ -52925,7 +53033,6 @@
         "count": 1,
         "aip": 60.888,
         "category": "HOSPITALITY, LEISURE, SPORT & TOURISM",
-        "rankableJournal": true,
         "people": [
           "JDB"
         ],
@@ -52938,7 +53045,6 @@
         "count": 1,
         "aip": 60.823,
         "category": "BUSINESS",
-        "rankableJournal": true,
         "people": [
           "MR"
         ],
@@ -52951,7 +53057,6 @@
         "count": 1,
         "aip": 60.323,
         "category": "PUBLIC, ENVIRONMENTAL & OCCUPATIONAL HEALTH",
-        "rankableJournal": true,
         "people": [
           "JDB"
         ],
@@ -52964,7 +53069,6 @@
         "count": 2,
         "aip": 58.946,
         "category": "BUSINESS",
-        "rankableJournal": true,
         "people": [
           "JS",
           "MR"
@@ -52979,7 +53083,6 @@
         "count": 1,
         "aip": 57.39,
         "category": "NURSING",
-        "rankableJournal": true,
         "people": [
           "LM"
         ],
@@ -52992,7 +53095,6 @@
         "count": 2,
         "aip": 56.365,
         "category": "PUBLIC, ENVIRONMENTAL & OCCUPATIONAL HEALTH",
-        "rankableJournal": true,
         "people": [
           "JDB"
         ],
@@ -53006,7 +53108,6 @@
         "count": 3,
         "aip": 55.775,
         "category": "SOCIAL SCIENCES, INTERDISCIPLINARY",
-        "rankableJournal": true,
         "people": [
           "CDD"
         ],
@@ -53021,7 +53122,6 @@
         "count": 2,
         "aip": 55.192,
         "category": "MANAGEMENT",
-        "rankableJournal": true,
         "people": [
           "CDD",
           "OJ"
@@ -53036,7 +53136,6 @@
         "count": 9,
         "aip": 53.023,
         "category": "COMMUNICATION",
-        "rankableJournal": true,
         "people": [
           "CDD",
           "FR",
@@ -53059,7 +53158,6 @@
         "count": 1,
         "aip": 49.061,
         "category": "MANAGEMENT",
-        "rankableJournal": true,
         "people": [
           "MR"
         ],
@@ -53072,7 +53170,6 @@
         "count": 1,
         "aip": 48.564,
         "category": "PSYCHOLOGY, APPLIED",
-        "rankableJournal": true,
         "people": [
           "JDB"
         ],
@@ -53085,7 +53182,6 @@
         "count": 4,
         "aip": 47.854,
         "category": "MANAGEMENT",
-        "rankableJournal": true,
         "people": [
           "CDD",
           "GVV",
@@ -53103,7 +53199,6 @@
         "count": 1,
         "aip": 47.59,
         "category": "CONSTRUCTION & BUILDING TECHNOLOGY",
-        "rankableJournal": true,
         "people": [
           "JDB"
         ],
@@ -53116,7 +53211,6 @@
         "count": 1,
         "aip": 47.553,
         "category": "PSYCHOLOGY, SOCIAL",
-        "rankableJournal": true,
         "people": [
           "CDD"
         ],
@@ -53129,7 +53223,6 @@
         "count": 4,
         "aip": 46.473,
         "category": "INTERNATIONAL RELATIONS",
-        "rankableJournal": true,
         "people": [
           "CDD"
         ],
@@ -53143,7 +53236,6 @@
         "count": 1,
         "aip": 44.396,
         "category": "ECONOMICS",
-        "rankableJournal": true,
         "people": [
           "LM"
         ],
@@ -53156,7 +53248,6 @@
         "count": 1,
         "aip": 34.493,
         "category": "ENGINEERING, INDUSTRIAL",
-        "rankableJournal": true,
         "people": [
           "JS"
         ],
@@ -53169,7 +53260,6 @@
         "count": 3,
         "aip": 33.416,
         "category": "PSYCHOLOGY, MULTIDISCIPLINARY",
-        "rankableJournal": true,
         "people": [
           "BN",
           "MA"
@@ -53184,7 +53274,6 @@
         "count": 1,
         "aip": 32.195,
         "category": "MANAGEMENT",
-        "rankableJournal": true,
         "people": [
           "JS"
         ],
@@ -53197,7 +53286,6 @@
         "count": 1,
         "aip": 23.301,
         "category": "LITERATURE",
-        "rankableJournal": true,
         "people": [
           "MR"
         ],
@@ -53210,7 +53298,6 @@
         "count": 1,
         "aip": 18.265,
         "category": "PSYCHOLOGY, MULTIDISCIPLINARY",
-        "rankableJournal": true,
         "people": [
           "MR"
         ],
@@ -53223,7 +53310,6 @@
         "count": 1,
         "aip": 13.436,
         "category": "PSYCHOLOGY, SOCIAL",
-        "rankableJournal": true,
         "people": [
           "LM"
         ],
@@ -53236,7 +53322,6 @@
         "count": 26,
         "aip": 6.934,
         "category": "PSYCHOLOGY, SOCIAL",
-        "rankableJournal": true,
         "people": [
           "BN",
           "CDD",
@@ -53270,8 +53355,7 @@
         "journal": "Scandinavian Journal of Work and Organizational Psychology",
         "count": 6,
         "aip": null,
-        "category": "Journal",
-        "rankableJournal": true,
+        "category": "",
         "people": [
           "FR",
           "JDB"
@@ -53289,8 +53373,7 @@
         "journal": "Frontiers in Organizational Psychology",
         "count": 2,
         "aip": null,
-        "category": "Journal",
-        "rankableJournal": true,
+        "category": "",
         "people": [
           "MA",
           "MR"
@@ -53304,8 +53387,7 @@
         "journal": "International Journal of Environmental Research and Public Health",
         "count": 2,
         "aip": null,
-        "category": "Journal",
-        "rankableJournal": true,
+        "category": "",
         "people": [
           "FR",
           "JDB"
@@ -53319,8 +53401,7 @@
         "journal": "German Journal of Human Resource Management Zeitschrift für Personalforschung",
         "count": 2,
         "aip": null,
-        "category": "Journal",
-        "rankableJournal": true,
+        "category": "",
         "people": [
           "JDB"
         ],
@@ -53332,8 +53413,7 @@
         "journal": "Trends in Psychology",
         "count": 1,
         "aip": null,
-        "category": "Journal",
-        "rankableJournal": true,
+        "category": "",
         "people": [
           "MR"
         ],
@@ -53345,8 +53425,7 @@
         "journal": "Management and Business Review",
         "count": 1,
         "aip": null,
-        "category": "Journal",
-        "rankableJournal": true,
+        "category": "",
         "people": [
           "FR",
           "JJ",
@@ -53360,8 +53439,7 @@
         "journal": "Journal of Online Trust and Safety",
         "count": 1,
         "aip": null,
-        "category": "Journal",
-        "rankableJournal": true,
+        "category": "",
         "people": [
           "JL"
         ],
@@ -53373,8 +53451,7 @@
         "journal": "Die Unternehmung",
         "count": 1,
         "aip": null,
-        "category": "Journal",
-        "rankableJournal": true,
+        "category": "",
         "people": [
           "SB"
         ],
@@ -53386,8 +53463,7 @@
         "journal": "Études britanniques contemporaines",
         "count": 1,
         "aip": null,
-        "category": "Journal",
-        "rankableJournal": true,
+        "category": "",
         "people": [
           "MR"
         ],
@@ -53399,8 +53475,7 @@
         "journal": "Journal of urban regeneration and renewal",
         "count": 1,
         "aip": null,
-        "category": "Journal",
-        "rankableJournal": true,
+        "category": "",
         "people": [
           "JS"
         ],
@@ -53412,8 +53487,7 @@
         "journal": "eLife",
         "count": 1,
         "aip": null,
-        "category": "Journal",
-        "rankableJournal": true,
+        "category": "",
         "people": [
           "CDD"
         ],
@@ -53425,8 +53499,7 @@
         "journal": "Kvinder Køn & Forskning",
         "count": 1,
         "aip": null,
-        "category": "Journal",
-        "rankableJournal": true,
+        "category": "",
         "people": [
           "MR"
         ],
@@ -53438,8 +53511,7 @@
         "journal": "Applied Psychology: An International Review",
         "count": 1,
         "aip": null,
-        "category": "Journal",
-        "rankableJournal": true,
+        "category": "",
         "people": [
           "FR",
           "GVV",
@@ -53453,8 +53525,7 @@
         "journal": "Maandblad Voor Accountancy en Bedrijfseconomie",
         "count": 1,
         "aip": null,
-        "category": "Journal",
-        "rankableJournal": true,
+        "category": "",
         "people": [
           "FR"
         ],
@@ -53466,8 +53537,7 @@
         "journal": "IEEE Engineering Management Review",
         "count": 1,
         "aip": null,
-        "category": "Journal",
-        "rankableJournal": true,
+        "category": "",
         "people": [
           "GVV",
           "TDV"
@@ -53480,8 +53550,7 @@
         "journal": "Tijdschrift voor Toezicht",
         "count": 1,
         "aip": null,
-        "category": "Journal",
-        "rankableJournal": true,
+        "category": "",
         "people": [
           "FR",
           "JS"
@@ -53494,8 +53563,7 @@
         "journal": "Psychologist",
         "count": 1,
         "aip": null,
-        "category": "Journal",
-        "rankableJournal": true,
+        "category": "",
         "people": [
           "JDB"
         ],
@@ -53507,8 +53575,7 @@
         "journal": "Policy Insights from the Behavioral and Brain Sciences",
         "count": 1,
         "aip": null,
-        "category": "Journal",
-        "rankableJournal": true,
+        "category": "",
         "people": [
           "CDD"
         ],
@@ -53520,8 +53587,7 @@
         "journal": "Gothic.net",
         "count": 1,
         "aip": null,
-        "category": "Journal",
-        "rankableJournal": true,
+        "category": "",
         "people": [
           "CDD"
         ],
@@ -53533,8 +53599,7 @@
         "journal": "ACR North American Advances",
         "count": 1,
         "aip": null,
-        "category": "Journal",
-        "rankableJournal": true,
+        "category": "",
         "people": [
           "LM"
         ],
@@ -53546,8 +53611,7 @@
         "journal": "Human Resource Management International Digest",
         "count": 1,
         "aip": null,
-        "category": "Journal",
-        "rankableJournal": true,
+        "category": "",
         "people": [
           "MR"
         ],
@@ -53559,8 +53623,7 @@
         "journal": "Equal Opportunities International",
         "count": 1,
         "aip": null,
-        "category": "Journal",
-        "rankableJournal": true,
+        "category": "",
         "people": [
           "MR"
         ],
@@ -53572,8 +53635,7 @@
         "journal": "Gedrag en Organisatie",
         "count": 1,
         "aip": null,
-        "category": "Journal",
-        "rankableJournal": true,
+        "category": "",
         "people": [
           "OJ"
         ],
@@ -53585,8 +53647,7 @@
         "journal": "Zeitschrift für Sozialpsychologie",
         "count": 1,
         "aip": null,
-        "category": "Journal",
-        "rankableJournal": true,
+        "category": "",
         "people": [
           "GVV"
         ],
@@ -53603,18 +53664,18 @@
       },
       {
         "category": "MANAGEMENT",
-        "count": 127,
-        "meanAip": 91.13
+        "count": 130,
+        "meanAip": 90.83
       },
       {
         "category": "PSYCHOLOGY, MULTIDISCIPLINARY",
-        "count": 71,
-        "meanAip": 83.34
+        "count": 73,
+        "meanAip": 83.37
       },
       {
         "category": "PSYCHOLOGY, APPLIED",
-        "count": 58,
-        "meanAip": 91.25
+        "count": 56,
+        "meanAip": 91.06
       },
       {
         "category": "BUSINESS",
@@ -53784,12 +53845,12 @@
       {
         "category": "GEOGRAPHY",
         "count": 1,
-        "meanAip": 94.11
+        "meanAip": 94.12
       },
       {
         "category": "URBAN STUDIES",
         "count": 1,
-        "meanAip": 91.72
+        "meanAip": 91.73
       },
       {
         "category": "BEHAVIORAL SCIENCES",
@@ -53814,7 +53875,7 @@
       {
         "category": "ERGONOMICS",
         "count": 1,
-        "meanAip": 80.2
+        "meanAip": 80.21
       },
       {
         "category": "NUTRITION & DIETETICS",
@@ -53946,11 +54007,11 @@
       },
       {
         "year": 2020,
-        "count": 36
+        "count": 37
       },
       {
         "year": 2021,
-        "count": 33
+        "count": 34
       },
       {
         "year": 2022,
@@ -53970,7 +54031,7 @@
       },
       {
         "year": 2026,
-        "count": 24
+        "count": 25
       }
     ],
     "edges": [
@@ -54360,15 +54421,6 @@
         "highAipCount": 0,
         "pubIds": [
           "doi:10.1177/1368430221999457"
-        ]
-      },
-      {
-        "source": "JDB",
-        "target": "MA",
-        "count": 1,
-        "highAipCount": 1,
-        "pubIds": [
-          "doi:10.1037/ocp0000269"
         ]
       },
       {

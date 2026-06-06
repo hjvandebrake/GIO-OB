@@ -429,9 +429,12 @@ function renderStaffList(rows, bundle) {
       ? `${row.topicPubs} matching pubs`
       : `${row.publications} pubs`;
     return `<button class="staff-row${selected ? " on" : ""}" type="button" data-staff-id="${escapeHtml(row.person.id)}">
-      <span>
-        <strong>${escapeHtml(row.person.display)}</strong>
-        <em>${escapeHtml(row.person.name)}</em>
+      <span class="staff-row-main">
+        ${personPhoto(row.person, "staff-row-photo")}
+        <span>
+          <strong>${escapeHtml(row.person.display)}</strong>
+          <em>${escapeHtml(row.person.name)}</em>
+        </span>
       </span>
       <span class="staff-row-meta">${escapeHtml(meta)}</span>
     </button>`;
@@ -456,6 +459,7 @@ function renderStaffProfile(row, bundle) {
   ` : "";
   els.staffProfile.innerHTML = `
     <div class="staff-profile-head">
+      ${personPhoto(person, "staff-profile-photo")}
       <div>
         <p class="eye">${escapeHtml(person.display)}</p>
         <h3>${escapeHtml(person.name)}</h3>
@@ -473,6 +477,11 @@ function renderStaffProfile(row, bundle) {
   renderStaffTopics(person.id);
   renderStaffRelated(person.id, bundle, row);
   renderStaffPublications(person.id, bundle, row);
+}
+
+function personPhoto(person, className) {
+  if (!person?.photo) return "";
+  return `<img class="${escapeHtml(className)}" src="${escapeHtml(person.photo)}" alt="" loading="lazy">`;
 }
 
 function staffMetric(label, value) {

@@ -390,6 +390,21 @@ td.muted { color: var(--ink-400); }
   padding: 13px 10px;
   text-align: left;
 }
+.staff-row-main {
+  align-items: center;
+  display: flex;
+  gap: 9px;
+  min-width: 0;
+}
+.staff-row-photo {
+  background: var(--ink-100);
+  border: 1px solid var(--ink-200);
+  border-radius: 50%;
+  flex: 0 0 auto;
+  height: 28px;
+  object-fit: cover;
+  width: 28px;
+}
 .staff-row:hover,
 .staff-row.on {
   background: var(--ink-100);
@@ -421,9 +436,21 @@ td.muted { color: var(--ink-400); }
 }
 .staff-detail { min-width: 0; }
 .staff-profile-head {
+  align-items: center;
   border-top: 1px solid var(--ink-200);
+  display: flex;
+  gap: 12px;
   margin-bottom: 12px;
   padding-top: 16px;
+}
+.staff-profile-photo {
+  background: var(--ink-100);
+  border: 1px solid var(--ink-200);
+  border-radius: 50%;
+  flex: 0 0 auto;
+  height: 34px;
+  object-fit: cover;
+  width: 34px;
 }
 .staff-profile-head h3 {
   font-family: var(--serif);
