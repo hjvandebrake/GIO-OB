@@ -15,6 +15,7 @@ const state = {
 };
 
 const els = {};
+const OVERVIEW_START_YEAR = 2005;
 
 const EXPERTISE_FAMILIES = [
   ["teams and groups", ["team", "teams", "group", "groups", "teamwork", "small group", "work group", "project team", "team performance", "team effectiveness"]],
@@ -377,9 +378,9 @@ function rankedStaff(bundle) {
   if (bundle.raw) {
     return rows
       .filter((row) => row.score > 0)
-      .sort((a, b) => b.score - a.score || b.topicPubs - a.topicPubs || b.publications - a.publications || a.person.display.localeCompare(b.person.display));
+      .sort((a, b) => a.person.display.localeCompare(b.person.display));
   }
-  return rows.sort((a, b) => b.publications - a.publications || b.highAip - a.highAip || a.person.display.localeCompare(b.person.display));
+  return rows.sort((a, b) => a.person.display.localeCompare(b.person.display));
 }
 
 function staffSearchStats(person, bundle) {
@@ -763,22 +764,20 @@ function countedPublication(pub) {
 
 function renderOverview() {
   if (!state.data) return;
-  const pubs = activePublications();
+  const pubs = activePublications().filter((pub) => pub.year >= overviewStartYear());
   const people = activePeople();
   const journals = aggregateJournals(pubs);
   const aipRankablePubs = pubs.filter((pub) => pub.rankableJournal !== false && isNumber(pub.aip));
   const highAip = pubs.filter((pub) => isNumber(pub.aip) && pub.aip >= 95);
   const meanAip = aipRankablePubs.length ? aipRankablePubs.reduce((sum, pub) => sum + pub.aip, 0) / aipRankablePubs.length : null;
-  const years = publicationWindowYears();
-  const avgPubsPersonYear = people.length && years ? pubs.length / people.length / years : null;
-  const avgHighPersonYear = people.length && years ? highAip.length / people.length / years : null;
+  const averages = personYearAverages(pubs, people, overviewStartYear());
 
   els.metrics.innerHTML = [
     metric("Publications", pubs.length),
     metric("Mean AIP", isNumber(meanAip) ? meanAip.toFixed(1) : "NA"),
     metric("AIP >= 95", highAip.length),
-    metric("Avg pubs/person/yr", isNumber(avgPubsPersonYear) ? avgPubsPersonYear.toFixed(2) : "NA"),
-    metric("Avg >=95/person/yr", isNumber(avgHighPersonYear) ? avgHighPersonYear.toFixed(2) : "NA"),
+    metric("Avg pubs/person-year", isNumber(averages.publications) ? averages.publications.toFixed(2) : "NA"),
+    metric("Avg >=95/person-year", isNumber(averages.highAip) ? averages.highAip.toFixed(2) : "NA"),
   ].join("");
 
   renderJournalTable(journals);
@@ -795,6 +794,38 @@ function metric(label, value, sub = "") {
     <p class="metric-value">${escapeHtml(String(value))}</p>
     ${sub ? `<p class="metric-sub">${escapeHtml(sub)}</p>` : ""}
   </div>`;
+}
+
+function personYearAverages(pubs, people, startYearOverride = null) {
+  const [fromYear, toYear] = activeWindowYears();
+  const years = pubs.map((pub) => pub.year).filter((year) => Number.isFinite(year));
+  const startYear = Number.isFinite(startYearOverride)
+    ? startYearOverride
+    : Number.isFinite(fromYear) ? fromYear : Math.min(...years);
+  const endYear = Number.isFinite(toYear) ? toYear : Math.max(...years);
+  if (!Number.isFinite(startYear) || !Number.isFinite(endYear) || endYear < startYear) {
+    return { publications: null, highAip: null, personYears: 0 };
+  }
+  let personYears = 0;
+  people.forEach((person) => {
+    const personPubs = pubs.filter((pub) => pub.matchedPeople.includes(person.id));
+    if (!personPubs.length) return;
+    const firstYear = Math.min(...personPubs.map((pub) => pub.year).filter((year) => Number.isFinite(year)));
+    if (!Number.isFinite(firstYear)) return;
+    personYears += Math.max(0, endYear - Math.max(startYear, firstYear) + 1);
+  });
+  if (!personYears) return { publications: null, highAip: null, personYears: 0 };
+  const highAip = pubs.filter((pub) => isNumber(pub.aip) && pub.aip >= 95).length;
+  return {
+    publications: pubs.length / personYears,
+    highAip: highAip / personYears,
+    personYears,
+  };
+}
+
+function overviewStartYear() {
+  const [fromYear] = activeWindowYears();
+  return Math.max(OVERVIEW_START_YEAR, Number.isFinite(fromYear) ? fromYear : OVERVIEW_START_YEAR);
 }
 
 function publicationWindowYears() {
@@ -881,14 +912,15 @@ function renderJournalTable(journals) {
 
 function renderYearBars(pubs) {
   const counts = countBy(pubs, (pub) => pub.year);
-  const endYear = Math.max(2000, ...Array.from(counts.keys()).filter((year) => Number.isFinite(year)));
+  const startYear = overviewStartYear();
+  const endYear = Math.max(startYear, ...Array.from(counts.keys()).filter((year) => Number.isFinite(year)));
   const years = [];
-  for (let year = 2000; year <= endYear; year += 1) years.push(year);
+  for (let year = startYear; year <= endYear; year += 1) years.push(year);
   const max = Math.max(1, ...years.map((year) => counts.get(year) || 0));
   els.yearBars.innerHTML = `<div class="year-histogram">
     ${years.map((year) => {
       const count = counts.get(year) || 0;
-      const label = year === 2000 || year % 5 === 0 ? year : "";
+      const label = year === startYear || year % 5 === 0 ? year : "";
       const height = count ? Math.max(8, (count / max) * 100) : 0;
       return `<span class="year-bar" title="${year}: ${count} publication${count === 1 ? "" : "s"}">
         <i style="height:${height}%"></i>
