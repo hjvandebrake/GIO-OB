@@ -226,12 +226,83 @@ function peopleById() {
 function activePublications() {
   const ids = activePeopleSet();
   const [fromYear, toYear] = activeWindowYears();
-  return state.data.publications.filter((pub) => (
+  const filtered = state.data.publications.filter((pub) => (
     countedPublication(pub)
     && pub.matchedPeople.some((id) => ids.has(id))
     && (!fromYear || pub.year >= fromYear)
     && (!toYear || pub.year <= toYear)
   ));
+  return dedupePublications(filtered);
+}
+
+function dedupePublications(pubs) {
+  const groups = new Map();
+  pubs.forEach((pub) => {
+    const key = duplicatePublicationKey(pub);
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(pub);
+  });
+  return Array.from(groups.values()).map(mergePublicationGroup);
+}
+
+function duplicatePublicationKey(pub) {
+  const normalizedTitle = normalizeSearchText(pub.title);
+  if (normalizedTitle.length > 30) return `title:${normalizedTitle}`;
+  if (pub.doi) return `doi:${String(pub.doi).toLowerCase().trim()}`;
+  return `id:${pub.id}`;
+}
+
+function mergePublicationGroup(group) {
+  if (group.length === 1) return group[0];
+  const sorted = group.slice().sort(publicationPreferenceSort);
+  const base = { ...sorted[0] };
+  base.duplicateIds = group.map((pub) => pub.id);
+  base.matchedPeople = uniqueFlat(group.map((pub) => pub.matchedPeople || []));
+  base.sourcePeople = uniqueFlat(group.map((pub) => pub.sourcePeople || []));
+  base.evidence = uniqueFlat(group.map((pub) => pub.evidence || []));
+  base.authors = mergeAuthorLists(group);
+  if (!base.doi) base.doi = group.find((pub) => pub.doi)?.doi || "";
+  if (!isNumber(base.aip)) {
+    const ranked = group.find((pub) => isNumber(pub.aip));
+    if (ranked) {
+      base.aip = ranked.aip;
+      base.aipJournal = ranked.aipJournal;
+      base.aipCategory = ranked.aipCategory;
+      base.aipMatchMethod = ranked.aipMatchMethod;
+    }
+  }
+  return base;
+}
+
+function publicationPreferenceSort(a, b) {
+  const aipA = isNumber(a.aip) ? a.aip : -1;
+  const aipB = isNumber(b.aip) ? b.aip : -1;
+  if (aipB !== aipA) return aipB - aipA;
+  if (Boolean(b.doi) !== Boolean(a.doi)) return Boolean(b.doi) - Boolean(a.doi);
+  const sourceA = String(a.sourceType || "");
+  const sourceB = String(b.sourceType || "");
+  if (sourceA !== sourceB) {
+    if (/repository|preprint/i.test(sourceA)) return 1;
+    if (/repository|preprint/i.test(sourceB)) return -1;
+  }
+  return String(b.journal || "").length - String(a.journal || "").length;
+}
+
+function mergeAuthorLists(group) {
+  const preferred = group.slice().sort((a, b) => (b.authors || []).length - (a.authors || []).length)[0]?.authors || [];
+  const seen = new Set();
+  const authors = [];
+  [...preferred, ...group.flatMap((pub) => pub.authors || [])].forEach((author) => {
+    const key = normalizeSearchText(author);
+    if (!key || seen.has(key)) return;
+    seen.add(key);
+    authors.push(author);
+  });
+  return authors;
+}
+
+function uniqueFlat(groups) {
+  return Array.from(new Set(groups.flat().filter(Boolean)));
 }
 
 function activeGrants() {
@@ -1101,16 +1172,56 @@ function buildExternalCollaboration(pubs, activeIds) {
       shortLabel: shortExternalLabel(node.label),
       count: node.pubIds.size,
       strength: node.strength,
+      aggregate: false,
     }))
     .sort((a, b) => b.count - a.count || b.strength - a.strength || a.label.localeCompare(b.label));
   const repeated = ranked.filter((node) => node.count > 1);
-  const selectedNodes = (repeated.length >= 16 ? repeated : ranked).slice(0, 28);
-  const selectedIds = new Set(selectedNodes.map((node) => node.id));
-  const selectedEdges = Array.from(edgeMap.values())
-    .filter((edge) => selectedIds.has(edge.target))
-    .sort((a, b) => b.count - a.count)
-    .slice(0, 90);
-  return { nodes: selectedNodes, edges: selectedEdges };
+  const namedNodes = (repeated.length >= 16 ? repeated : ranked).slice(0, 48);
+  const namedIds = new Set(namedNodes.map((node) => node.id));
+  const namedEdges = Array.from(edgeMap.values())
+    .filter((edge) => namedIds.has(edge.target))
+    .sort((a, b) => b.count - a.count);
+
+  const remainderBySource = new Map();
+  Array.from(edgeMap.values())
+    .filter((edge) => !namedIds.has(edge.target))
+    .forEach((edge) => {
+      if (!remainderBySource.has(edge.source)) {
+        remainderBySource.set(edge.source, { source: edge.source, count: 0, pubIds: new Set(), authors: new Set() });
+      }
+      const remainder = remainderBySource.get(edge.source);
+      remainder.count += edge.count;
+      edge.pubIds.forEach((id) => remainder.pubIds.add(id));
+      remainder.authors.add(edge.target);
+    });
+
+  const remainderNodes = Array.from(remainderBySource.values())
+    .filter((row) => row.count > 0)
+    .map((row) => ({
+      id: `external-other:${row.source}`,
+      label: "Other external coauthors",
+      shortLabel: "Other external",
+      count: row.pubIds.size,
+      strength: row.count,
+      aggregate: true,
+      anchorId: row.source,
+      authorCount: row.authors.size,
+    }));
+  const remainderEdges = Array.from(remainderBySource.values())
+    .filter((row) => row.count > 0)
+    .map((row) => ({
+      source: row.source,
+      target: `external-other:${row.source}`,
+      count: row.count,
+      pubIds: Array.from(row.pubIds),
+      aggregate: true,
+      authorCount: row.authors.size,
+    }));
+
+  return {
+    nodes: [...namedNodes, ...remainderNodes],
+    edges: [...namedEdges, ...remainderEdges],
+  };
 }
 
 function externalAuthorsForPublication(pub) {
@@ -1268,8 +1379,11 @@ function drawNetwork(nodes, edges, externalNodes = [], externalEdges = []) {
     const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
     path.setAttribute("d", externalEdgePath(a, b, width, height));
     path.setAttribute("class", "external-edge");
-    path.setAttribute("stroke-width", String((0.55 + (edge.count / maxExternalEdgeCount) * 2.1).toFixed(2)));
-    path.appendChild(svgTitle(`${a.label} + ${b.label}: ${edge.count} shared publications`));
+    path.setAttribute("stroke-width", String((0.45 + Math.sqrt(edge.count / maxExternalEdgeCount) * 1.9).toFixed(2)));
+    const title = edge.aggregate
+      ? `${a.label}: ${edge.pubIds.length} publications with ${edge.authorCount} other external coauthors`
+      : `${a.label} + ${b.label}: ${edge.count} shared publications`;
+    path.appendChild(svgTitle(title));
     svg.appendChild(path);
   });
 
@@ -1292,17 +1406,22 @@ function drawNetwork(nodes, edges, externalNodes = [], externalEdges = []) {
     circle.setAttribute("cx", node.x);
     circle.setAttribute("cy", node.y);
     circle.setAttribute("r", String(radius.toFixed(1)));
-    circle.setAttribute("class", "external-node");
-    circle.appendChild(svgTitle(`${node.label}: ${node.count} shared publications with roster members`));
+    circle.setAttribute("class", `external-node${node.aggregate ? " aggregate" : ""}`);
+    const nodeTitle = node.aggregate
+      ? `${node.label}: ${node.count} publications with ${node.authorCount} outside coauthors`
+      : `${node.label}: ${node.count} shared publications with roster members`;
+    circle.appendChild(svgTitle(nodeTitle));
     group.appendChild(circle);
 
-    const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
-    label.setAttribute("x", node.x);
-    label.setAttribute("y", node.y + radius + 10);
-    label.setAttribute("text-anchor", "middle");
-    label.setAttribute("class", "external-label");
-    label.textContent = node.shortLabel;
-    group.appendChild(label);
+    if (node.aggregate || node.count >= 4) {
+      const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      label.setAttribute("x", node.x);
+      label.setAttribute("y", node.y + radius + 10);
+      label.setAttribute("text-anchor", "middle");
+      label.setAttribute("class", `external-label${node.aggregate ? " aggregate" : ""}`);
+      label.textContent = node.shortLabel;
+      group.appendChild(label);
+    }
     svg.appendChild(group);
   });
 
@@ -1399,9 +1518,18 @@ function layoutExternalNodes(externalNodes, externalEdges, internalNodes, width,
     const baseAngle = anchor
       ? Math.atan2(anchor.y - cy, anchor.x - cx)
       : -Math.PI / 2 + (Math.PI * 2 * groupIndex) / Math.max(1, groups.size);
-    group.sort((a, b) => b.count - a.count || a.label.localeCompare(b.label));
-    group.forEach((node, index) => {
-      const spread = (index - (group.length - 1) / 2) * 0.17;
+    const aggregate = group.filter((node) => node.aggregate);
+    const named = group.filter((node) => !node.aggregate)
+      .sort((a, b) => b.count - a.count || a.label.localeCompare(b.label));
+    let namedIndex = 0;
+    [...aggregate, ...named].forEach((node) => {
+      let spread = 0;
+      if (!node.aggregate) {
+        const ring = Math.floor(namedIndex / 2) + 1;
+        const side = namedIndex % 2 === 0 ? 1 : -1;
+        spread = ring * side * 0.15;
+        namedIndex += 1;
+      }
       const jitter = hashNumber(node.id) * 0.05;
       const angle = baseAngle + spread + jitter;
       placed.push({

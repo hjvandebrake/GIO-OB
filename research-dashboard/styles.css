@@ -554,7 +554,7 @@ td.muted { color: var(--ink-400); }
   fill: none;
   stroke: var(--ink-400);
   stroke-linecap: round;
-  opacity: .18;
+  opacity: .16;
 }
 .edge { fill: none; stroke: color-mix(in oklch, var(--ink-400), var(--teal) 25%); stroke-linecap: round; opacity: .62; }
 .external-node {
@@ -562,6 +562,11 @@ td.muted { color: var(--ink-400); }
   opacity: .42;
   stroke: var(--ink-400);
   stroke-width: 1;
+}
+.external-node.aggregate {
+  fill: var(--white);
+  opacity: .36;
+  stroke-dasharray: 2 3;
 }
 .external-label {
   fill: var(--ink-400);
@@ -572,6 +577,11 @@ td.muted { color: var(--ink-400); }
   stroke: var(--white);
   stroke-width: 3px;
   stroke-linejoin: round;
+}
+.external-label.aggregate {
+  font-size: 0.55rem;
+  font-weight: 700;
+  opacity: .64;
 }
 .node { fill: var(--white); stroke: var(--red); stroke-width: 2; }
 .node.low { stroke: var(--ink-400); }
