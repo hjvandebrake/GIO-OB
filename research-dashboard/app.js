@@ -414,8 +414,12 @@ function ensureSelectedStaff(rows) {
     state.selectedStaffId = "";
     return null;
   }
-  if (!state.selectedStaffId || !rows.some((row) => row.person.id === state.selectedStaffId)) {
-    state.selectedStaffId = rows[0].person.id;
+  if (!state.selectedStaffId) {
+    return null;
+  }
+  if (!rows.some((row) => row.person.id === state.selectedStaffId)) {
+    state.selectedStaffId = "";
+    return null;
   }
   return rows.find((row) => row.person.id === state.selectedStaffId) || rows[0];
 }
@@ -448,6 +452,8 @@ function renderStaffProfile(row, bundle) {
     els.staffProfile.innerHTML = `<div class="staff-empty">No profile selected.</div>`;
     els.staffTopics.innerHTML = "";
     els.staffRelated.innerHTML = "";
+    els.staffPublicationEye.textContent = "Publications";
+    els.staffPublicationTitle.textContent = "Selected staff publications";
     setEmptyTable(els.staffPublicationTable, "No matching publications.");
     return;
   }
